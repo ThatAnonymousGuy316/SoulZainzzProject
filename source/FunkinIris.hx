@@ -186,7 +186,8 @@ class IrisPreset
             'Section' => Section,
             'StageData' => StageData,
             'BackgroundDancer' => BackgroundDancer,
-            'BackgroundGirls' => BackgroundGirls
+            'BackgroundGirls' => BackgroundGirls,
+            'CheckboxThingie' => CheckboxThingie
         ];
     }
 
@@ -210,9 +211,9 @@ class IrisPreset
             instance.setAlias(names, value);
         }
 
-        instance.set('FlxVideo', hxvlc.flixel.FlxVideo);
+        /*instance.set('FlxVideo', hxvlc.flixel.FlxVideo);
         instance.set('FlxVideoSprite', hxvlc.flixel.FlxVideoSprite);
-        instance.set('FlxInternalVideo', hxvlc.flixel.FlxInternalVideo);
+        instance.set('FlxInternalVideo', hxvlc.flixel.FlxInternalVideo);*/
 
         instance.set('Std', Std);
         instance.set('StringTools', StringTools);

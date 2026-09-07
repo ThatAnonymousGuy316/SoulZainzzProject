@@ -1,5 +1,6 @@
 @echo off
 haxelib newrepo
+haxelib fixrepo
 haxelib install flixel
 haxelib install flixel-addons
 haxelib install flixel-ui

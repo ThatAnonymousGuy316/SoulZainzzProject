@@ -19,7 +19,10 @@ class HXState extends MusicBeatState
 
     override function create()
     {
-        irisScript = new FunkinIris(Paths.modFolders('states/${FilePath}.hx'));
+        var path = Paths.getPreloadPath('states/${FilePath}.hx');
+        if (sys.FileSystem.exists(Paths.modFolders('states/${FilePath}.hx')))
+            path = Paths.modFolders('states/${FilePath}.hx');
+        irisScript = new FunkinIris(path);
         irisScript.set('__state__', this);
         irisScript.set('controls', controls);
         irisScript.call('onState', []);

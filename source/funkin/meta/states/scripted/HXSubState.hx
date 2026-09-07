@@ -19,9 +19,15 @@ class HXSubState extends MusicBeatSubstate
 
     override function create()
     {
-        irisScript = new FunkinIris(Paths.modFolders('states/${FilePath}.hx'));
-        irisScript.set('__state__', this);
+        var path = Paths.getPreloadPath('states/substates/${FilePath}.hx');
+        if (sys.FileSystem.exists(Paths.modFolders('states/substates/${FilePath}.hx')))
+            path = Paths.modFolders('states/substates/${FilePath}.hx');
+        irisScript = new FunkinIris(path);
+        irisScript.set('__substate__', this);
         irisScript.set('controls', controls);
+        irisScript.set('close', function(){
+            close();
+        });
         irisScript.call('onState', []);
 
         super.create();

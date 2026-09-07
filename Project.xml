@@ -120,10 +120,6 @@
 	<haxelib name="haxeui-core" />
 	<haxelib name="haxeui-flixel" />
 
-	<section if="cpp">
-		<haxelib name="hxvlc" if="desktop || mobile" />
-	</section>
-
 	<!--<haxelib name="polymod"/> -->
 	<!-- <haxelib name="hxcpp-debug-server" if="desktop"/> -->
 

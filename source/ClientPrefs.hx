@@ -24,6 +24,20 @@ class ClientPrefs {
 	public static var hideHud:Bool = false;
 	public static var noteOffset:Int = 0;
 	public static var arrowHSV:Array<Array<Int>> = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
+	public static var quantNotes:Bool = false;
+	public static var quantHSV:Array<Array<Int>> = [
+		[0, -20, 0], // 4th
+		[-130, -20, 0], // 8th
+		[-80, -20, 0], // 12th
+		[128, -30, 0], // 16th
+		[-120, -70, -35], // 20th
+		[-80, -20, 0], // 24th
+		[50, -20, 0], // 32nd
+		[-80, -20, 0], // 48th
+		[160, -15, 0], // 64th
+		[-120, -70, -35], // 96th
+		[-120, -70, -35]// 192nd
+	];
 	public static var imagesPersist:Bool = false;
 	public static var ghostTapping:Bool = true;
 	public static var hideTime:Bool = false;
@@ -67,6 +81,7 @@ class ClientPrefs {
 	public static function saveSettings() {
 		FlxG.save.data.scrollSpeedSetting = scrollSpeedSetting;
 		FlxG.save.data.RoundLeDecimal = RoundLeDecimal;
+		FlxG.save.data.quantNotes = quantNotes;
 
 		FlxG.save.data.downScroll = downScroll;
 		FlxG.save.data.middleScroll = middleScroll;
@@ -109,6 +124,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.RoundLeDecimal != null) {
 			RoundLeDecimal = FlxG.save.data.RoundLeDecimal;
+		}
+		if(FlxG.save.data.quantNotes != null) {
+			quantNotes = FlxG.save.data.quantNotes;
 		}
 
 		if(FlxG.save.data.downScroll != null) {
