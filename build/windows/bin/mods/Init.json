@@ -1,0 +1,11 @@
+{
+    "windowTitle": "Friday Night Funkin' SoulZainzz Engine",
+    "redirects" : {
+        "TitleState" : "",
+        "MainMenuState": "",
+        "StoryMenuState": "",
+        "FreeplayState": "",
+        "CreditsState": "",
+        "OptionsState": ""
+    }
+}
