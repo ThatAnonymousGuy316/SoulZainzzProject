@@ -13,22 +13,27 @@ class HXSubState extends MusicBeatSubstate
 
     override function destroy()
     {
-        irisScript.destroy();
+        if (irisScript != null)
+            irisScript.destroy();
         super.destroy();
     }
 
     override function create()
     {
-        var path = Paths.getPreloadPath('states/substates/${FilePath}.hx');
-        if (sys.FileSystem.exists(Paths.modFolders('states/substates/${FilePath}.hx')))
-            path = Paths.modFolders('states/substates/${FilePath}.hx');
-        irisScript = new FunkinIris(path);
-        irisScript.set('__substate__', this);
-        irisScript.set('controls', controls);
-        irisScript.set('close', function(){
-            close();
-        });
-        irisScript.call('onState', []);
+        for (ext in ScriptExts.HScript){
+            var path = Paths.getPreloadPath('states/substates/${FilePath}.${ext}');
+            if (sys.FileSystem.exists(Paths.modFolders('states/substates/${FilePath}.${ext}')))
+                path = Paths.modFolders('states/substates/${FilePath}.${ext}');
+            if (sys.FileSystem.exists(path)){
+                irisScript = new FunkinIris(path);
+                irisScript.set('__substate__', this);
+                irisScript.set('controls', controls);
+                irisScript.set('close', function(){
+                    close();
+                });
+                irisScript.call('onState', []);
+            }
+        }
 
         super.create();
     }
@@ -36,20 +41,25 @@ class HXSubState extends MusicBeatSubstate
     override function update(elapsed:Float)
     {
         super.update(elapsed);
-        irisScript.call('onUpdate', [elapsed]);
+        if (irisScript != null)
+            irisScript.call('onUpdate', [elapsed]);
     }
     
     override function beatHit()
     {
         super.beatHit();
-        irisScript.set('curBeat', curBeat);
-        irisScript.call('onBeatHit', []);
+        if (irisScript != null){
+            irisScript.set('curBeat', curBeat);
+            irisScript.call('onBeatHit', []);
+        }
     }
 
     override function stepHit()
     {
         super.stepHit();
-        irisScript.set('curStep', curStep);
-        irisScript.call('onStepHit', []);
+        if (irisScript != null){
+            irisScript.set('curStep', curStep);
+            irisScript.call('onStepHit', []);
+        }
     }
 }

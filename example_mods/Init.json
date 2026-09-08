@@ -1,5 +1,10 @@
 {
     "windowTitle": "Friday Night Funkin' SoulZainzz Engine",
+    "startupLogo" : "SoulZainzzLogo",
+    "extensions": {
+        "lua": ["lua"],
+        "hscript": ["hx", "hxs", "hscript"]
+    },
     "redirects" : {
         "TitleState" : "",
         "MainMenuState": "",

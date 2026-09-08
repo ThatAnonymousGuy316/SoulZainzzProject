@@ -352,20 +352,32 @@ class NotesSubstate extends MusicBeatSubstate
 		}
 	}
 
-	function resetValue(selected:Int, type:Int) {
-		curValue = 0;
-		ClientPrefs.arrowHSV[selected][type] = 0;
-		switch(type) {
-			case 0: shaderArray[selected].hue = 0;
-			case 1: shaderArray[selected].saturation = 0;
-			case 2: shaderArray[selected].brightness = 0;
+	function resetValue(selected:Int, type:Int)
+	{
+		var value:Int = ClientPrefs.defaultArrowHSV[selected][type];
+
+		curValue = value;
+		ClientPrefs.arrowHSV[selected][type] = value;
+
+		switch (type)
+		{
+			case 0:
+				shaderArray[selected].hue = value / 360;
+
+			case 1:
+				shaderArray[selected].saturation = value / 100;
+
+			case 2:
+				shaderArray[selected].brightness = value / 100;
 		}
-		grpNumbers.members[(selected * 3) + type].changeText('0');
+
+		grpNumbers.members[(selected * 3) + type].changeText(Std.string(value));
 	}
+	
 	function updateValue(change:Float = 0) {
 		curValue += change;
 		var roundedValue:Int = Math.round(curValue);
-		var max:Float = 180;
+		var max:Float = 360;
 		switch(typeSelected) {
 			case 1 | 2: max = 100;
 		}
@@ -686,7 +698,8 @@ class PreferencesSubstate extends MusicBeatSubstate
 		'Middlescroll',
 		'Ghost Tapping',
 		'Note Delay',
-		'Note Splashes',
+		'Note Splashes Player',
+		'Note Splashes Opponent',
 		'Hide HUD',
 		'Hide Song Length',
 		'Flashing Lights',
@@ -848,8 +861,11 @@ class PreferencesSubstate extends MusicBeatSubstate
 						}
 						OptionsState.menuBG.antialiasing = ClientPrefs.globalAntialiasing;
 
-					case 'Note Splashes':
+					case 'Note Splashes Player':
 						ClientPrefs.noteSplashes = !ClientPrefs.noteSplashes;
+
+					case 'Note Splashes Opponent':
+						ClientPrefs.noteSplashesCPU = !ClientPrefs.noteSplashesCPU;
 
 					case 'Flashing Lights':
 						ClientPrefs.flashing = !ClientPrefs.flashing;
@@ -978,8 +994,10 @@ class PreferencesSubstate extends MusicBeatSubstate
 				daText = "If unchecked, your mom won't be angry at you.";
 			case 'Violence':
 				daText = "If unchecked, you won't get disgusted as frequently.";
-			case 'Note Splashes':
+			case 'Note Splashes Player':
 				daText = "If unchecked, hitting \"Sick!\" notes won't show particles.";
+			case 'Note Splashes Opponent':
+				daText = "If unchecked, Opponent notes won't show particles.";
 			case 'Flashing Lights':
 				daText = "Uncheck this if you're sensitive to flashing lights!";
 			case 'Camera Zooms':
@@ -1040,8 +1058,10 @@ class PreferencesSubstate extends MusicBeatSubstate
 						daValue = ClientPrefs.lowQuality;
 					case 'Anti-Aliasing':
 						daValue = ClientPrefs.globalAntialiasing;
-					case 'Note Splashes':
+					case 'Note Splashes Player':
 						daValue = ClientPrefs.noteSplashes;
+					case 'Note Splashes Opponent':
+						daValue = ClientPrefs.noteSplashesCPU;
 					case 'Flashing Lights':
 						daValue = ClientPrefs.flashing;
 					case 'Downscroll':

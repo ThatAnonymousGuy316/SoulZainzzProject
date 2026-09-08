@@ -21,7 +21,7 @@ class FunkinIris
     {
         this.ScriptPath = ScriptPath;
         if (sys.FileSystem.exists(ScriptPath)){
-            final rules:RawIrisConfig = {name: haxe.io.Path.withoutDirectory(haxe.io.Path.withoutExtension(ScriptPath)), autoRun: false, autoPreset: true};
+            final rules:RawIrisConfig = {name: haxe.io.Path.withoutDirectory(ScriptPath), autoRun: false, autoPreset: true};
             final getText:String->String = #if sys sys.io.File.getContent #elseif openfl openfl.utils.Assets.getText #end;
             script = new Iris(getText(ScriptPath), rules);
 
@@ -187,7 +187,9 @@ class IrisPreset
             'StageData' => StageData,
             'BackgroundDancer' => BackgroundDancer,
             'BackgroundGirls' => BackgroundGirls,
-            'CheckboxThingie' => CheckboxThingie
+            'CheckboxThingie' => CheckboxThingie,
+            'MenuCharacter' => MenuCharacter,
+            'MenuItem' => MenuItem
         ];
     }
 
@@ -211,9 +213,9 @@ class IrisPreset
             instance.setAlias(names, value);
         }
 
-        /*instance.set('FlxVideo', hxvlc.flixel.FlxVideo);
+        instance.set('FlxVideo', hxvlc.flixel.FlxVideo);
         instance.set('FlxVideoSprite', hxvlc.flixel.FlxVideoSprite);
-        instance.set('FlxInternalVideo', hxvlc.flixel.FlxInternalVideo);*/
+        instance.set('FlxInternalVideo', hxvlc.flixel.FlxInternalVideo);
 
         instance.set('Std', Std);
         instance.set('StringTools', StringTools);

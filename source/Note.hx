@@ -59,8 +59,8 @@ class Note extends FlxSprite
 	public var copyAngle:Bool = true;
 	public var copyAlpha:Bool = true;
 
-	public var hitHealth:Float = 0.023;
-	public var missHealth:Float = 0.0475;
+	public var hitHealth:Float = 0.05;
+	public var missHealth:Float = 0.0695;
 
 	public var texture(default, set):String = null;
 
@@ -86,7 +86,6 @@ class Note extends FlxSprite
 				case 'Hurt Note':
 					ignoreNote = mustPress;
 					reloadNote('HURT');
-					noteSplashTexture = 'HURTnoteSplashes';
 					colorSwap.hue = 0;
 					colorSwap.saturation = 0;
 					colorSwap.brightness = 0;
@@ -153,8 +152,8 @@ class Note extends FlxSprite
 
 		if (isSustainNote && prevNote != null)
 		{
-			alpha = 0.6;
-			multAlpha = 0.6;
+			alpha = 1;
+			multAlpha = 1;
 			if(ClientPrefs.downScroll) flipY = true;
 
 			offsetX += width / 2;

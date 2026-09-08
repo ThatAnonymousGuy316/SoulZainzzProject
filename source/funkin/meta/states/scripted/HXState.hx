@@ -13,19 +13,24 @@ class HXState extends MusicBeatState
 
     override function destroy()
     {
-        irisScript.destroy();
+        if (irisScript != null)
+            irisScript.destroy();
         super.destroy();
     }
 
     override function create()
     {
-        var path = Paths.getPreloadPath('states/${FilePath}.hx');
-        if (sys.FileSystem.exists(Paths.modFolders('states/${FilePath}.hx')))
-            path = Paths.modFolders('states/${FilePath}.hx');
-        irisScript = new FunkinIris(path);
-        irisScript.set('__state__', this);
-        irisScript.set('controls', controls);
-        irisScript.call('onState', []);
+        for (ext in ScriptExts.HScript){
+            var path = Paths.getPreloadPath('states/${FilePath}.${ext}');
+            if (sys.FileSystem.exists(Paths.modFolders('states/${FilePath}.${ext}')))
+                path = Paths.modFolders('states/${FilePath}.${ext}');
+            if (sys.FileSystem.exists(path)){
+                irisScript = new FunkinIris(path);
+                irisScript.set('__state__', this);
+                irisScript.set('controls', controls);
+                irisScript.call('onState', []);
+            }
+        }
 
         super.create();
     }
@@ -33,20 +38,25 @@ class HXState extends MusicBeatState
     override function update(elapsed:Float)
     {
         super.update(elapsed);
-        irisScript.call('onUpdate', [elapsed]);
+        if (irisScript != null)
+            irisScript.call('onUpdate', [elapsed]);
     }
     
     override function beatHit()
     {
         super.beatHit();
-        irisScript.set('curBeat', curBeat);
-        irisScript.call('onBeatHit', []);
+        if (irisScript != null){
+            irisScript.set('curBeat', curBeat);
+            irisScript.call('onBeatHit', []);
+        }
     }
 
     override function stepHit()
     {
         super.stepHit();
-        irisScript.set('curStep', curStep);
-        irisScript.call('onStepHit', []);
+        if (irisScript != null){
+            irisScript.set('curStep', curStep);
+            irisScript.call('onStepHit', []);
+        }
     }
 }

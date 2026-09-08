@@ -1,5 +1,11 @@
 package;
 
+class ScriptExts
+{
+    public static var Lua = ['lua'];
+    public static var HScript = ['hx', 'hxs', 'hscript'];
+}
+
 class Redirects
 {
     public static var TitleState:String = '';

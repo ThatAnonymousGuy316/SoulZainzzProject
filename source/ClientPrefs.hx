@@ -16,6 +16,7 @@ class ClientPrefs {
 	public static var flashing:Bool = true;
 	public static var globalAntialiasing:Bool = true;
 	public static var noteSplashes:Bool = true;
+	public static var noteSplashesCPU:Bool = true;
 	public static var lowQuality:Bool = false;
 	public static var framerate:Int = 60;
 	public static var cursing:Bool = true;
@@ -23,7 +24,18 @@ class ClientPrefs {
 	public static var camZooms:Bool = true;
 	public static var hideHud:Bool = false;
 	public static var noteOffset:Int = 0;
-	public static var arrowHSV:Array<Array<Int>> = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
+	public static var arrowHSV:Array<Array<Int>> = [
+	  [-75, 0, 0], // Left
+	  [-180, 0, 0], // Down
+	  [150, 0, 0], // Up
+	  [0, 0, 0]  // Right
+	];
+	public static var defaultArrowHSV:Array<Array<Int>> = [
+		[-75, 0, 0],   // Left
+		[-180, 0, 0],  // Down
+		[150, 0, 0],   // Up
+		[0, 0, 0]      // Right
+	];
 	public static var quantNotes:Bool = false;
 	public static var quantHSV:Array<Array<Int>> = [
 		[0, -20, 0], // 4th
@@ -89,6 +101,7 @@ class ClientPrefs {
 		FlxG.save.data.flashing = flashing;
 		FlxG.save.data.globalAntialiasing = globalAntialiasing;
 		FlxG.save.data.noteSplashes = noteSplashes;
+		FlxG.save.data.noteSplashesCPU = noteSplashesCPU;
 		FlxG.save.data.lowQuality = lowQuality;
 		FlxG.save.data.framerate = framerate;
 		FlxG.save.data.cursing = cursing;
@@ -149,6 +162,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.noteSplashes != null) {
 			noteSplashes = FlxG.save.data.noteSplashes;
+		}
+		if(FlxG.save.data.noteSplashesCPU != null) {
+			noteSplashesCPU = FlxG.save.data.noteSplashesCPU;
 		}
 		if(FlxG.save.data.lowQuality != null) {
 			lowQuality = FlxG.save.data.lowQuality;
