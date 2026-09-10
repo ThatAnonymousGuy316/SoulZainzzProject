@@ -1,0 +1,10 @@
+{
+    "WindowTitle": "Friday Night Funkin': SoulZainzz Engine",
+    "WindowIcon": "SoulZainzzIcon",
+    "LogoPath": "SoulZainzzLogo",
+    "extensions": {
+        "lua": ["lua"],
+        "haxe": ["hx", "hxs", "hscript"],
+        "swift": ["swift"]
+    }
+}

@@ -1,5 +1,8 @@
 package editors;
 
+#if desktop
+import Discord.DiscordClient;
+#end
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
@@ -42,8 +45,13 @@ class MenuCharacterEditorState extends MusicBeatState
 			scale: 1,
 			position: [0, 0],
 			idle_anim: 'M Dad Idle',
-			confirm_anim: 'M Dad Idle'
+			confirm_anim: 'M Dad Idle',
+			flipX: false
 		};
+		#if desktop
+		// Updating Discord Rich Presence
+		DiscordClient.changePresence("Menu Character Editor", "Editting: " + characterFile.image);
+		#end
 
 		grpWeekCharacters = new FlxTypedGroup<MenuCharacter>();
 		for (char in 0...3)
@@ -155,8 +163,8 @@ class MenuCharacterEditorState extends MusicBeatState
 	var imageInputText:FlxUIInputText;
 	var idleInputText:FlxUIInputText;
 	var confirmInputText:FlxUIInputText;
-	var confirmDescText:FlxText;
 	var scaleStepper:FlxUINumericStepper;
+	var flipXCheckbox:FlxUICheckBox;
 	function addCharacterUI() {
 		var tab_group = new FlxUI(null, UI_mainbox);
 		tab_group.name = "Character";
@@ -168,16 +176,24 @@ class MenuCharacterEditorState extends MusicBeatState
 		confirmInputText = new FlxUIInputText(10, idleInputText.y + 35, 100, characterFile.confirm_anim, 8);
 		blockPressWhileTypingOn.push(confirmInputText);
 
-		var reloadImageButton:FlxButton = new FlxButton(10, confirmInputText.y + 30, "Reload Char", function() {
+		flipXCheckbox = new FlxUICheckBox(10, confirmInputText.y + 30, null, null, "Flip X", 100);
+		flipXCheckbox.callback = function()
+		{
+			grpWeekCharacters.members[curTypeSelected].flipX = flipXCheckbox.checked;
+			characterFile.flipX = flipXCheckbox.checked;
+		};
+
+		var reloadImageButton:FlxButton = new FlxButton(140, confirmInputText.y + 30, "Reload Char", function() {
 			reloadSelectedCharacter();
 		});
 		
 		scaleStepper = new FlxUINumericStepper(140, imageInputText.y, 0.05, 1, 0.1, 30, 2);
 
-		confirmDescText = new FlxText(10, confirmInputText.y - 18, 0, 'Start Press animation on the .XML:');
+		var confirmDescText = new FlxText(10, confirmInputText.y - 18, 0, 'Start Press animation on the .XML:');
 		tab_group.add(new FlxText(10, imageInputText.y - 18, 0, 'Image file name:'));
 		tab_group.add(new FlxText(10, idleInputText.y - 18, 0, 'Idle animation on the .XML:'));
 		tab_group.add(new FlxText(scaleStepper.x, scaleStepper.y - 18, 0, 'Scale:'));
+		tab_group.add(flipXCheckbox);
 		tab_group.add(reloadImageButton);
 		tab_group.add(confirmDescText);
 		tab_group.add(imageInputText);
@@ -221,14 +237,17 @@ class MenuCharacterEditorState extends MusicBeatState
 		char.frames = Paths.getSparrowAtlas('menucharacters/' + characterFile.image);
 		char.animation.addByPrefix('idle', characterFile.idle_anim, 24);
 		if(curTypeSelected == 1) char.animation.addByPrefix('confirm', characterFile.confirm_anim, 24, false);
+		char.flipX = (characterFile.flipX == true);
 
 		char.scale.set(characterFile.scale, characterFile.scale);
 		char.updateHitbox();
 		char.animation.play('idle');
-
-		confirmDescText.visible = (curTypeSelected == 1);
-		confirmInputText.visible = (curTypeSelected == 1);
 		updateOffset();
+		
+		#if desktop
+		// Updating Discord Rich Presence
+		DiscordClient.changePresence("Menu Character Editor", "Editting: " + characterFile.image);
+		#end
 	}
 
 	override function getEvent(id:String, sender:Dynamic, data:Dynamic, ?params:Array<Dynamic>) {
@@ -267,7 +286,6 @@ class MenuCharacterEditorState extends MusicBeatState
 			FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
 			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 			if(FlxG.keys.justPressed.ESCAPE) {
-				FlxG.mouse.visible = false;
 				MusicBeatState.switchState(new editors.MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			}
@@ -329,8 +347,8 @@ class MenuCharacterEditorState extends MusicBeatState
 
 		#if sys
 		var fullPath:String = null;
-		var jsonLoaded = cast Json.parse(Json.stringify(_file)); //Exploit(???) for accessing a private variable
-		if(jsonLoaded.__path != null) fullPath = jsonLoaded.__path; //I'm either a genious or dangerously dumb
+		@:privateAccess
+		if(_file.__path != null) fullPath = _file.__path;
 
 		if(fullPath != null) {
 			var rawJson:String = File.getContent(fullPath);

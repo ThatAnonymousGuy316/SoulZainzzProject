@@ -2350,12 +2350,12 @@ class FlxCamera extends FlxBasic
 		viewMarginY = 0.5 * height * (scaleY - initialZoom) / scaleY;
 	}
 	
-	public static inline function get_defaultCameras():Array<FlxCamera>
+	static inline function get_defaultCameras():Array<FlxCamera>
 	{
 		return _defaultCameras;
 	}
 	
-	public static inline function set_defaultCameras(value:Array<FlxCamera>):Array<FlxCamera>
+	static inline function set_defaultCameras(value:Array<FlxCamera>):Array<FlxCamera>
 	{
 		return _defaultCameras = value;
 	}

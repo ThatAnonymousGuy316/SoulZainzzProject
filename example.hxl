@@ -1,0 +1,36 @@
+-- example.hxl
+
+--[[
+    there are two built in inheritng types
+    None for None (this acts like a class)
+    and Script for a general purpose Script
+    you can also make blank classes with just functions and implement an interface into those classes to define script types
+    you can also make a class that extends a class not apart of your project but in your libraries (for example FlxSprite)
+    and implement the extendable class interface to allow that class to be extended!
+]]
+
+using Script -- how imports (or what the script uses) work is of a map in either the interp or parser where you just type in the classes Name for it that you inputed (so if I made flixel.FlxSprite's name Sprite you'd do using Sprite)
+
+class Example extends Script
+    local x = 1
+
+    local y = defineArray([arg1, arg2])
+
+    function new() -- when the script is created
+        super("Example") -- for the Script Class you put in the script name in Super
+        print(x)
+    end
+
+    function onState(state) -- when you switched to that state
+
+    end
+
+    function onUpdate(elapsed) -- on the scripts update
+
+    end
+
+    function onUpdateState(elapsed, state) -- update for a specfic state
+
+    end
+end
+

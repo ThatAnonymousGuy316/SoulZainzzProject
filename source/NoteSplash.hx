@@ -4,18 +4,6 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
 
-typedef SplashJson = {
-	var alpha:Float;
-	var supportColors:Bool;
-	var offsets:OffsetMeta;
-	var framerate:Int;
-}
-
-typedef OffsetMeta = {
-	var x:Float;
-	var y:Float;
-}
-
 class NoteSplash extends FlxSprite
 {
 	public var colorSwap:ColorSwap = null;
@@ -39,7 +27,7 @@ class NoteSplash extends FlxSprite
 
 	public function setupNoteSplash(x:Float, y:Float, note:Int = 0, texture:String = null, hueColor:Float = 0, satColor:Float = 0, brtColor:Float = 0) {
 		setPosition(x - Note.swagWidth * 0.95, y - Note.swagWidth);
-		alpha = 1;
+		alpha = 0.6;
 
 		if(texture == null) {
 			texture = 'noteSplashes';
@@ -52,25 +40,56 @@ class NoteSplash extends FlxSprite
 		colorSwap.hue = hueColor;
 		colorSwap.saturation = satColor;
 		colorSwap.brightness = brtColor;
-		offset.set(-50, -65);
+		offset.set(-30, -5);
 
 		var animNum:Int = FlxG.random.int(1, 2);
 		animation.play('note' + note + '-' + animNum, true);
-		animation.curAnim.frameRate = 24 + FlxG.random.int(-2, 2);
+		if(animation.curAnim != null)animation.curAnim.frameRate = 30;
 	}
 
 	function loadAnims(skin:String) {
-		frames = Paths.getSparrowAtlas(skin);
-		for (i in 1...3) {
-			animation.addByPrefix("note1-" + i, "Kitty", 24, false);
-			animation.addByPrefix("note2-" + i, "Kitty", 24, false);
-			animation.addByPrefix("note0-" + i, "Kitty", 24, false);
-			animation.addByPrefix("note3-" + i, "Kitty", 24, false);
+		if (!PlayState.isPixelStage)
+		{
+			switch (ClientPrefs.splashSkin)
+			{
+				case "Soul":
+					frames = Paths.getSparrowAtlas("noteSplashes-soul");
+					animation.addByPrefix("note1-1", "note splash blue 1", 30, false);
+					animation.addByPrefix("note2-1", "note splash green 1", 30, false);
+					animation.addByPrefix("note0-1", "note splash purple 1", 30, false);
+					animation.addByPrefix("note3-1", "note splash red 1", 30, false);
+					animation.addByPrefix("note1-2", "note splash blue 1", 30, false);
+					animation.addByPrefix("note2-2", "note splash green 1", 30, false);
+					animation.addByPrefix("note0-2", "note splash purple 1", 30, false);
+					animation.addByPrefix("note3-2", "note splash red 1", 30, false);
+				default:
+					frames = Paths.getSparrowAtlas(skin);
+					animation.addByPrefix("note1-1", "note splash blue 1", 30, false);
+					animation.addByPrefix("note2-1", "note splash green 1", 30, false);
+					animation.addByPrefix("note0-1", "note splash purple 1", 30, false);
+					animation.addByPrefix("note3-1", "note splash red 1", 30, false);
+					animation.addByPrefix("note1-2", "note splash blue 1", 30, false);
+					animation.addByPrefix("note2-2", "note splash green 1", 30, false);
+					animation.addByPrefix("note0-2", "note splash purple 1", 30, false);
+					animation.addByPrefix("note3-2", "note splash red 1", 30, false);
+			}
+		}
+		else
+		{
+			frames = Paths.getSparrowAtlas(skin);
+			animation.addByPrefix("note1-1", "note splash blue 1", 30, false);
+			animation.addByPrefix("note2-1", "note splash green 1", 30, false);
+			animation.addByPrefix("note0-1", "note splash purple 1", 30, false);
+			animation.addByPrefix("note3-1", "note splash red 1", 30, false);
+			animation.addByPrefix("note1-2", "note splash blue 1", 30, false);
+			animation.addByPrefix("note2-2", "note splash green 1", 30, false);
+			animation.addByPrefix("note0-2", "note splash purple 1", 30, false);
+			animation.addByPrefix("note3-2", "note splash red 1", 30, false);
 		}
 	}
 
 	override function update(elapsed:Float) {
-		if(animation.curAnim.finished) kill();
+		if(animation.curAnim != null)if(animation.curAnim.finished) kill();
 
 		super.update(elapsed);
 	}
