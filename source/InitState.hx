@@ -28,6 +28,7 @@ class InitState extends MusicBeatState
         GameConfig.initJson();
         GameConfig.setExts();
         GameConfig.setWindowTitle();
+        GameConfig.getPlugins();
 
         funkinLogo = new FlxSprite().loadGraphic(Paths.image(GameConfig.getLogoPath()));
         funkinLogo.screenCenter();

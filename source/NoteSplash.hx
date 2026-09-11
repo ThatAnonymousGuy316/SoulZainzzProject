@@ -52,18 +52,15 @@ class NoteSplash extends FlxSprite
 		{
 			switch (ClientPrefs.splashSkin)
 			{
-				case "Soul":
-					frames = Paths.getSparrowAtlas("noteSplashes-soul");
-					animation.addByPrefix("note1-1", "note splash blue 1", 30, false);
-					animation.addByPrefix("note2-1", "note splash green 1", 30, false);
-					animation.addByPrefix("note0-1", "note splash purple 1", 30, false);
-					animation.addByPrefix("note3-1", "note splash red 1", 30, false);
-					animation.addByPrefix("note1-2", "note splash blue 1", 30, false);
-					animation.addByPrefix("note2-2", "note splash green 1", 30, false);
-					animation.addByPrefix("note0-2", "note splash purple 1", 30, false);
-					animation.addByPrefix("note3-2", "note splash red 1", 30, false);
 				default:
-					frames = Paths.getSparrowAtlas(skin);
+					if (GameConfig.noteSplashData.exists(ClientPrefs.splashSkin))
+					{
+						frames = Paths.getSparrowAtlas(GameConfig.noteSplashData.get(ClientPrefs.splashSkin));
+					}
+					else
+					{
+						frames = Paths.getSparrowAtlas(skin);
+					}
 					animation.addByPrefix("note1-1", "note splash blue 1", 30, false);
 					animation.addByPrefix("note2-1", "note splash green 1", 30, false);
 					animation.addByPrefix("note0-1", "note splash purple 1", 30, false);

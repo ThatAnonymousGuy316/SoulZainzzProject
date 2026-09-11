@@ -82,16 +82,13 @@ class StrumNote extends FlxSprite
 		}
 		else
 		{
-			switch (ClientPrefs.noteSkin)
+			if (GameConfig.noteSkinData.exists(ClientPrefs.noteSkin))
 			{
-				case "Chip":
-					frames = Paths.getSparrowAtlas("NOTE_assets-chip");
-				case "Future":
-					frames = Paths.getSparrowAtlas("NOTE_assets-future");
-				case "Soul":
-					frames = Paths.getSparrowAtlas("NOTE_assets-soul");
-				default:
-					frames = Paths.getSparrowAtlas(texture);
+				frames = Paths.getSparrowAtlas(GameConfig.noteSkinData.get(ClientPrefs.noteSkin));
+			}
+			else
+			{
+				frames = Paths.getSparrowAtlas(texture);
 			}
 			animation.addByPrefix('green', 'arrowUP');
 			animation.addByPrefix('blue', 'arrowDOWN');

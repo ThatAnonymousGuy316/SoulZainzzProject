@@ -96,6 +96,12 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 
 		var option:GameplayOption = new GameplayOption('Botplay', 'botplay', 'bool', false);
 		optionsArray.push(option);
+
+		var option:GameplayOption = new GameplayOption('Crash On Miss', 'crashonmiss', 'bool', false);
+		optionsArray.push(option);
+
+		var option:GameplayOption = new GameplayOption('Crash On Sick', 'crashonsick', 'bool', false);
+		optionsArray.push(option);
 	}
 
 	public function getOptionByName(name:String)
@@ -179,9 +185,9 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		}
 
 		if (controls.BACK) {
-			close();
-			ClientPrefs.saveSettings();
 			FlxG.sound.play(Paths.sound('cancelMenu'));
+			ClientPrefs.saveSettings();
+			close();
 		}
 
 		if(nextAccept <= 0)

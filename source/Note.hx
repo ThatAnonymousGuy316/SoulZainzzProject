@@ -14,7 +14,11 @@ typedef EventNote = {
 	strumTime:Float,
 	event:String,
 	value1:String,
-	value2:String
+	value2:String,
+	value3:String,
+	value4:String,
+	value5:String,
+	value6:String
 }
 
 class Note extends FlxSprite
@@ -301,16 +305,13 @@ class Note extends FlxSprite
 				}*/
 			}
 		} else {
-			switch (ClientPrefs.noteSkin)
+			if (GameConfig.noteSkinData.exists(ClientPrefs.noteSkin))
 			{
-				case "Chip":
-					frames = Paths.getSparrowAtlas("NOTE_assets-chip");
-				case "Future":
-					frames = Paths.getSparrowAtlas("NOTE_assets-future");
-				case "Soul":
-					frames = Paths.getSparrowAtlas("NOTE_assets-soul");
-				default:
-					frames = Paths.getSparrowAtlas(blahblah);
+				frames = Paths.getSparrowAtlas(GameConfig.noteSkinData.get(ClientPrefs.noteSkin));
+			}
+			else
+			{
+				frames = Paths.getSparrowAtlas(blahblah);
 			}
 			loadNoteAnims();
 			antialiasing = ClientPrefs.globalAntialiasing;

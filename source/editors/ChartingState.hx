@@ -154,6 +154,10 @@ class ChartingState extends MusicBeatState
 
 	var value1InputText:FlxUIInputText;
 	var value2InputText:FlxUIInputText;
+	var value3InputText:FlxUIInputText;
+	var value4InputText:FlxUIInputText;
+	var value5InputText:FlxUIInputText;
+	var value6InputText:FlxUIInputText;
 	var currentSongName:String;
 
 	var zoomTxt:FlxText;
@@ -1031,7 +1035,7 @@ class ChartingState extends MusicBeatState
 		eventPushedMap = null;
 		#end
 
-		descText = new FlxText(20, 200, 0, eventStuff[0][0]);
+		descText = new FlxText(20, 240, 0, eventStuff[0][0]);
 
 		var leEvents:Array<String> = [];
 		for (i in 0...eventStuff.length) {
@@ -1053,15 +1057,22 @@ class ChartingState extends MusicBeatState
 		});
 		blockPressWhileScrolling.push(eventDropDown);
 
-		var text:FlxText = new FlxText(20, 90, 0, "Value 1:");
-		tab_group_event.add(text);
-		value1InputText = new FlxUIInputText(20, 110, 100, "");
-		blockPressWhileTypingOn.push(value1InputText);
+		function addValueField(x:Float, y:Float, label:String, ?width:Int = 100):FlxUIInputText
+		{
+			var text:FlxText = new FlxText(x, y - 20, 0, label);
+			tab_group_event.add(text);
 
-		var text:FlxText = new FlxText(20, 130, 0, "Value 2:");
-		tab_group_event.add(text);
-		value2InputText = new FlxUIInputText(20, 150, 100, "");
-		blockPressWhileTypingOn.push(value2InputText);
+			var input = new FlxUIInputText(x, y, width, "");
+			blockPressWhileTypingOn.push(input);
+			return input;
+		}
+
+		value1InputText = addValueField(20, 110, "Value 1:");
+		value2InputText = addValueField(150, 110, "Value 2:");
+		value3InputText = addValueField(20, 150, "Value 3:");
+		value4InputText = addValueField(150, 150, "Value 4:");
+		value5InputText = addValueField(20, 190, "Value 5:");
+		value6InputText = addValueField(150, 190, "Value 6:");
 
 		// New event buttons
 		var removeButton:FlxButton = new FlxButton(eventDropDown.x + eventDropDown.width + 10, eventDropDown.y, '-', function()
@@ -1141,6 +1152,10 @@ class ChartingState extends MusicBeatState
 		tab_group_event.add(descText);
 		tab_group_event.add(value1InputText);
 		tab_group_event.add(value2InputText);
+		tab_group_event.add(value3InputText);
+		tab_group_event.add(value4InputText);
+		tab_group_event.add(value5InputText);
+		tab_group_event.add(value6InputText);
 		tab_group_event.add(eventDropDown);
 
 		UI_box.addGroup(tab_group_event);
@@ -1482,6 +1497,34 @@ class ChartingState extends MusicBeatState
 					if(curSelectedNote[1][curEventSelected] != null)
 					{
 						curSelectedNote[1][curEventSelected][2] = value2InputText.text;
+						updateGrid();
+					}
+				}
+				else if(sender == value3InputText) {
+					if(curSelectedNote[1][curEventSelected] != null)
+					{
+						curSelectedNote[1][curEventSelected][3] = value3InputText.text;
+						updateGrid();
+					}
+				}
+				else if(sender == value4InputText) {
+					if(curSelectedNote[1][curEventSelected] != null)
+					{
+						curSelectedNote[1][curEventSelected][4] = value4InputText.text;
+						updateGrid();
+					}
+				}
+				else if(sender == value5InputText) {
+					if(curSelectedNote[1][curEventSelected] != null)
+					{
+						curSelectedNote[1][curEventSelected][5] = value5InputText.text;
+						updateGrid();
+					}
+				}
+				else if(sender == value6InputText) {
+					if(curSelectedNote[1][curEventSelected] != null)
+					{
+						curSelectedNote[1][curEventSelected][6] = value6InputText.text;
 						updateGrid();
 					}
 				}
@@ -2548,6 +2591,10 @@ class ChartingState extends MusicBeatState
 				}
 				value1InputText.text = curSelectedNote[1][curEventSelected][1];
 				value2InputText.text = curSelectedNote[1][curEventSelected][2];
+				value3InputText.text = curSelectedNote[1][curEventSelected][3];
+				value4InputText.text = curSelectedNote[1][curEventSelected][4];
+				value5InputText.text = curSelectedNote[1][curEventSelected][5];
+				value6InputText.text = curSelectedNote[1][curEventSelected][6];
 			}
 			strumTimeInputText.text = '' + curSelectedNote[0];
 		}
@@ -2872,7 +2919,11 @@ class ChartingState extends MusicBeatState
 			var event = eventStuff[Std.parseInt(eventDropDown.selectedId)][0];
 			var text1 = value1InputText.text;
 			var text2 = value2InputText.text;
-			_song.events.push([noteStrum, [[event, text1, text2]]]);
+			var text3 = value3InputText.text;
+			var text4 = value4InputText.text;
+			var text5 = value5InputText.text;
+			var text6 = value6InputText.text;
+			_song.events.push([noteStrum, [[event, text1, text2, text3, text4, text5, text6]]]);
 			curSelectedNote = _song.events[_song.events.length - 1];
 			curEventSelected = 0;
 		}

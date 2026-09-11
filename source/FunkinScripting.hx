@@ -73,6 +73,18 @@ class FunkinSwift {
 		if (sys.FileSystem.exists(ScriptPath)){
 			script = SwiftScript.fromFile(ScriptPath);
 
+			set('script', function(){
+				return this;
+			});
+
+			for (i in GameConfig.customSwiftVariables.keys()){
+				set(i, GameConfig.customSwiftVariables.get(i));
+			}
+
+			for (i in GameConfig.customSwiftFunctions.keys()){
+				set(i, GameConfig.customSwiftFunctions.get(i));
+			}
+
 			script.run();
 
 			for (name in ['onCreate', 'onLoad', 'main']){
@@ -104,7 +116,15 @@ class FunkinHScript {
 			instanceScript = new Iris(getText(Script), rules);
 			new HScriptPreset(this);
 
-			instanceScript.set('_script_', this);
+			set('_script_', this);
+
+			for (i in GameConfig.customHaxeVariables.keys()){
+				set(i, GameConfig.customHaxeVariables.get(i));
+			}
+
+			for (i in GameConfig.customHaxeFunctions.keys()){
+				set(i, GameConfig.customHaxeFunctions.get(i));
+			}
 
 			instanceScript.execute();
 
@@ -300,6 +320,15 @@ class FunkinLua {
 		#else
 		set('buildTarget', 'unknown');
 		#end
+
+		for (i in GameConfig.customLuaVariables.keys()){
+			set(i, GameConfig.customLuaVariables.get(i));
+		}
+
+		//stuff 4 noobz like you B)
+		for (i in GameConfig.customLuaFunctions.keys()){
+			Lua_helper.add_callback(lua, i, GameConfig.customLuaFunctions.get(i));
+		}
 
 		// custom substate
 		Lua_helper.add_callback(lua, "openCustomSubstate", function(name:String, pauseGame:Bool = false) {
@@ -1618,10 +1647,14 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "precacheMusic", function(name:String) {
 			CoolUtil.precacheMusic(name);
 		});
-		Lua_helper.add_callback(lua, "triggerEvent", function(name:String, arg1:Dynamic, arg2:Dynamic) {
+		Lua_helper.add_callback(lua, "triggerEvent", function(name:String, arg1:Dynamic, arg2:Dynamic, arg3:Dynamic, arg4:Dynamic, arg5:Dynamic, arg6:Dynamic) {
 			var value1:String = arg1;
 			var value2:String = arg2;
-			PlayState.instance.triggerEventNote(name, value1, value2);
+			var value3:String = arg3;
+			var value4:String = arg4;
+			var value5:String = arg5;
+			var value6:String = arg6;
+			PlayState.instance.triggerEventNote(name, value1, value2, value3, value4, value5, value6);
 			//trace('Triggered event: ' + name + ', ' + value1 + ', ' + value2);
 			return true;
 		});
@@ -3518,6 +3551,10 @@ class HScriptPreset {
 		instance.set('FlxAnimate', flxanimate.FlxAnimate);
 		instance.set('StringTools', StringTools);
 		instance.set('CoolUtil', CoolUtil);
+
+		for (name in ['DialogueBox', 'DialogueBoxPsych']){
+			instance.set(name, DialogueBoxPsych);
+		}
 
 		instance.set("Paths", Paths);
 		instance.set("TypedAlphabet", TypedAlphabet);

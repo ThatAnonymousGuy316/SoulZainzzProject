@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="nene_dead.png">
+	<!-- Created with Adobe Animate version 22.0.5.191 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Nene Death Continue0000" x="10" y="10" width="423" height="637"/>
+	<SubTexture name="Nene Death Continue0001" x="434" y="10" width="422" height="635" frameX="0" frameY="-1" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Continue0002" x="857" y="10" width="421" height="633" frameX="0" frameY="-2" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Continue0003" x="1279" y="10" width="419" height="629" frameX="0" frameY="-4" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Continue0004" x="1699" y="10" width="418" height="627" frameX="0" frameY="-5" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Continue0005" x="2118" y="10" width="417" height="625" frameX="0" frameY="-6" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Continue0006" x="2536" y="10" width="415" height="621" frameX="0" frameY="-8" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Continue0007" x="2952" y="10" width="414" height="619" frameX="0" frameY="-9" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Continue0008" x="3367" y="10" width="413" height="617" frameX="0" frameY="-10" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Continue0009" x="10" y="648" width="411" height="613" frameX="0" frameY="-12" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Continue0010" x="422" y="648" width="410" height="611" frameX="0" frameY="-13" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Continue0011" x="833" y="648" width="409" height="609" frameX="0" frameY="-14" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Continue0012" x="1243" y="648" width="407" height="605" frameX="0" frameY="-16" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Continue0013" x="1651" y="648" width="406" height="603" frameX="0" frameY="-17" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Continue0014" x="2058" y="648" width="406" height="603" frameX="0" frameY="-17" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Loop0000" x="2465" y="648" width="423" height="637"/>
+	<SubTexture name="Nene Death Loop0001" x="2889" y="648" width="422" height="635" frameX="0" frameY="-1" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Loop0002" x="3312" y="648" width="421" height="633" frameX="0" frameY="-2" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Loop0003" x="10" y="1286" width="419" height="629" frameX="0" frameY="-4" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Loop0004" x="430" y="1286" width="418" height="627" frameX="0" frameY="-5" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Loop0005" x="849" y="1286" width="417" height="625" frameX="0" frameY="-6" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Loop0006" x="1267" y="1286" width="415" height="621" frameX="0" frameY="-8" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Loop0007" x="1683" y="1286" width="414" height="619" frameX="0" frameY="-9" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Loop0008" x="2098" y="1286" width="413" height="617" frameX="0" frameY="-10" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Loop0009" x="2512" y="1286" width="411" height="613" frameX="0" frameY="-12" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Loop0010" x="2924" y="1286" width="410" height="611" frameX="0" frameY="-13" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Loop0011" x="3335" y="1286" width="409" height="609" frameX="0" frameY="-14" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Loop0012" x="10" y="1916" width="407" height="605" frameX="0" frameY="-16" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Loop0013" x="418" y="1916" width="406" height="603" frameX="0" frameY="-17" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Death Loop0014" x="825" y="1916" width="406" height="603" frameX="0" frameY="-17" frameWidth="423" frameHeight="637"/>
+	<SubTexture name="Nene Dies0000" x="1232" y="1916" width="406" height="598" frameX="-1" frameY="0" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0001" x="1232" y="1916" width="406" height="598" frameX="-1" frameY="0" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0002" x="1639" y="1916" width="411" height="594" frameX="0" frameY="-4" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0003" x="1639" y="1916" width="411" height="594" frameX="0" frameY="-4" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0004" x="2051" y="1916" width="409" height="596" frameX="0" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0005" x="2051" y="1916" width="409" height="596" frameX="0" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0006" x="2461" y="1916" width="409" height="596" frameX="0" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0007" x="2871" y="1916" width="408" height="596" frameX="-1" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0008" x="2871" y="1916" width="408" height="596" frameX="-1" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0009" x="3280" y="1916" width="402" height="596" frameX="-7" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0010" x="3280" y="1916" width="402" height="596" frameX="-7" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0011" x="3683" y="1916" width="395" height="596" frameX="-14" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0012" x="3683" y="1916" width="395" height="596" frameX="-14" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0013" x="10" y="2522" width="399" height="604" frameX="-10" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0014" x="10" y="2522" width="399" height="604" frameX="-10" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0015" x="410" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0016" x="410" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0017" x="410" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0018" x="410" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0019" x="410" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0020" x="410" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0021" x="410" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0022" x="812" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0023" x="812" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0024" x="1214" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0025" x="1214" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0026" x="1616" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0027" x="1616" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0028" x="2018" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0029" x="2018" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0030" x="2420" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0031" x="2420" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0032" x="2420" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0033" x="2420" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0034" x="2420" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0035" x="2420" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0036" x="2420" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0037" x="2420" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0038" x="2420" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0039" x="2420" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0040" x="2420" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0041" x="2420" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0042" x="2822" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0043" x="2822" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0044" x="3224" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0045" x="3224" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0046" x="3626" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0047" x="3626" y="2522" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0048" x="10" y="3127" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0049" x="10" y="3127" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0050" x="412" y="3127" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0051" x="412" y="3127" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0052" x="814" y="3127" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0053" x="814" y="3127" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0054" x="1216" y="3127" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0055" x="1216" y="3127" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0056" x="1216" y="3127" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0057" x="1216" y="3127" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0058" x="1216" y="3127" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+	<SubTexture name="Nene Dies0059" x="1216" y="3127" width="401" height="601" frameX="-8" frameY="-2" frameWidth="411" frameHeight="606"/>
+</TextureAtlas>

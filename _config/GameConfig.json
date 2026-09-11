@@ -2,6 +2,7 @@
     "WindowTitle": "Friday Night Funkin': SoulZainzz Engine",
     "WindowIcon": "SoulZainzzIcon",
     "LogoPath": "SoulZainzzLogo",
+    "BotplayText": "[BOTPLAY]",
     "extensions": {
         "lua": ["lua"],
         "haxe": ["hx", "hxs", "hscript"],

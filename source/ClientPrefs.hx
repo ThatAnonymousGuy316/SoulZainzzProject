@@ -30,6 +30,7 @@ class ClientPrefs {
 	public static var healthBarAlpha:Float = 1;
 	public static var controllerMode:Bool = false;
 	public static var hitsoundVolume:Float = 0;
+	public static var missSoundVolume:Float = 0.3;
 	public static var pauseMusic:String = 'Tea Time';
 	public static var checkForUpdates:Bool = true;
 	public static var comboStacking = true;
@@ -51,6 +52,8 @@ class ClientPrefs {
 		'instakill' => false,
 		'practice' => false,
 		'botplay' => false,
+		'crashonmiss' => false,
+		'crashonsick' => false,
 		'opponentplay' => false
 	];
 
@@ -63,6 +66,8 @@ class ClientPrefs {
 
 	public static var noteSkin:String = "Default";
 	public static var splashSkin:String = "Default";
+
+	public static var vocalsVolume:Float = 1;
 
 	//Every key has two binds, add your key bind down here and then add your control on options/ControlsSubState.hx and Controls.hx
 	public static var keyBinds:Map<String, Array<FlxKey>> = [
@@ -133,6 +138,7 @@ class ClientPrefs {
 		FlxG.save.data.gameplaySettings = gameplaySettings;
 		FlxG.save.data.controllerMode = controllerMode;
 		FlxG.save.data.hitsoundVolume = hitsoundVolume;
+		FlxG.save.data.missSoundVolume = missSoundVolume;
 		FlxG.save.data.pauseMusic = pauseMusic;
 		FlxG.save.data.checkForUpdates = checkForUpdates;
 		FlxG.save.data.comboStacking = comboStacking;
@@ -251,6 +257,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.hitsoundVolume != null) {
 			hitsoundVolume = FlxG.save.data.hitsoundVolume;
+		}
+		if(FlxG.save.data.missSoundVolume != null) {
+			missSoundVolume = FlxG.save.data.missSoundVolume;
 		}
 		if(FlxG.save.data.pauseMusic != null) {
 			pauseMusic = FlxG.save.data.pauseMusic;
