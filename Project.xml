@@ -98,6 +98,9 @@
 	<haxelib name="flxgif" />
 	<haxelib name="yagp" />
 
+	<haxelib name="haxeui-core" />
+	<haxelib name="haxeui-flixel" />
+
 	<section if="cpp">
 		<haxelib name="hxvlc" if="desktop || mobile" />
 	</section>
