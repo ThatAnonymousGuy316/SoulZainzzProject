@@ -587,6 +587,64 @@ class PlayState extends MusicBeatState
 		}
 		#end
 
+		// MODCHART FILES :D
+		#if (MODS_ALLOWED && LUA_ALLOWED)
+		if (SONG.modchart != null && SONG.modchart != '')
+		{
+			for (i in GameConfig.luaExts){
+				var doPush:Bool = false;
+				var luaFile:String = 'modcharts/${SONG.modchart}/modchart.$i';
+				if(FileSystem.exists(Paths.modFolders(luaFile))) {
+					luaFile = Paths.modFolders(luaFile);
+					doPush = true;
+				} else {
+					luaFile = Paths.getPreloadPath(luaFile);
+					if(FileSystem.exists(luaFile)) {
+						doPush = true;
+					}
+				}
+
+				if(doPush)
+					luaArray.push(new FunkinLua(luaFile));
+			}
+
+			for (i in GameConfig.hxExts){
+				var doPush:Bool = false;
+				var luaFile:String = 'modcharts/${SONG.modchart}/modchart.$i';
+				if(FileSystem.exists(Paths.modFolders(luaFile))) {
+					luaFile = Paths.modFolders(luaFile);
+					doPush = true;
+				} else {
+					luaFile = Paths.getPreloadPath(luaFile);
+					if(FileSystem.exists(luaFile)) {
+						doPush = true;
+					}
+				}
+
+				if(doPush)
+					hxArray.push(new FunkinHScript(luaFile));
+			}
+
+			for (i in GameConfig.swiftExts){
+				var doPush:Bool = false;
+				var luaFile:String = 'modcharts/${SONG.modchart}/modchart.$i';
+				if(FileSystem.exists(Paths.modFolders(luaFile))) {
+					luaFile = Paths.modFolders(luaFile);
+					doPush = true;
+				} else {
+					luaFile = Paths.getPreloadPath(luaFile);
+					if(FileSystem.exists(luaFile)) {
+						doPush = true;
+					}
+				}
+
+				if(doPush)
+					swiftArray.push(new FunkinSwift(luaFile));
+			}
+		}
+		#end
+
+
 		var gfVersion:String = SONG.gfVersion;
 		if(gfVersion == null || gfVersion.length < 1)
 		{
@@ -3555,7 +3613,7 @@ class PlayState extends MusicBeatState
 	public var totalPlayed:Int = 0;
 	public var totalNotesHit:Float = 0.0;
 
-	public var showCombo:Bool = true;
+	public var showCombo:Bool = false;
 	public var showComboNum:Bool = true;
 	public var showRating:Bool = true;
 

@@ -227,6 +227,7 @@ class ChartingState extends MusicBeatState
 				gfVersion: 'gf',
 				speed: 1,
 				stage: 'stage',
+				modchart: '',
 				validScore: false
 			};
 			addSection();
@@ -406,6 +407,7 @@ class ChartingState extends MusicBeatState
 	var noteSkinInputText:FlxUIInputText;
 	var noteSplashesInputText:FlxUIInputText;
 	var stageDropDown:FlxUIDropDownMenuCustom;
+	var modchartDropDown:FlxUIDropDownMenuCustom;
 	var sliderRate:FlxUISlider;
 	function addSongUI():Void
 	{
@@ -596,6 +598,26 @@ class ChartingState extends MusicBeatState
 		stageDropDown.selectedLabel = _song.stage;
 		blockPressWhileScrolling.push(stageDropDown);
 
+		var modcharts:Array<String> = [''];
+
+		var modchartsPath:String = Paths.modFolders('modcharts');
+		if (sys.FileSystem.exists(modchartsPath))
+		{
+			for (folder in sys.FileSystem.readDirectory(modchartsPath))
+			{
+				var fullPath:String = haxe.io.Path.join([modchartsPath, folder]);
+				if (sys.FileSystem.isDirectory(fullPath))
+					modcharts.push(folder);
+			}
+		}
+
+		modchartDropDown = new FlxUIDropDownMenuCustom(stageDropDown.x, gfVersionDropDown.y, FlxUIDropDownMenuCustom.makeStrIdLabelArray(modcharts, true), function(character:String)
+		{
+			_song.modchart = modcharts[Std.parseInt(character)];
+		});
+		modchartDropDown.selectedLabel = _song.modchart;
+		blockPressWhileScrolling.push(modchartDropDown);
+
 		var skin = PlayState.SONG.arrowSkin;
 		if(skin == null) skin = '';
 		noteSkinInputText = new FlxUIInputText(player2DropDown.x, player2DropDown.y + 50, 150, skin, 8);
@@ -634,12 +656,14 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(new FlxText(gfVersionDropDown.x, gfVersionDropDown.y - 15, 0, 'Girlfriend:'));
 		tab_group_song.add(new FlxText(player1DropDown.x, player1DropDown.y - 15, 0, 'Boyfriend:'));
 		tab_group_song.add(new FlxText(stageDropDown.x, stageDropDown.y - 15, 0, 'Stage:'));
+		tab_group_song.add(new FlxText(modchartDropDown.x, modchartDropDown.y - 15, 0, 'Modchart:'));
 		tab_group_song.add(new FlxText(noteSkinInputText.x, noteSkinInputText.y - 15, 0, 'Note Texture:'));
 		tab_group_song.add(new FlxText(noteSplashesInputText.x, noteSplashesInputText.y - 15, 0, 'Note Splashes Texture:'));
 		tab_group_song.add(player2DropDown);
 		tab_group_song.add(gfVersionDropDown);
 		tab_group_song.add(player1DropDown);
 		tab_group_song.add(stageDropDown);
+		tab_group_song.add(modchartDropDown);
 
 		UI_box.addGroup(tab_group_song);
 

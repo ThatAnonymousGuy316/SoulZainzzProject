@@ -3536,6 +3536,7 @@ class HScriptPreset {
 		instance.set('keys', flixel.FlxG.keys);
 		instance.set('Math', Math);
 		instance.set('Std', Std);
+		instance.set('FlxMath', flixel.math.FlxMath);
 		instance.set('Xml', Xml);
 		instance.set('Json', haxe.Json);
 		instance.set('Dynamic', Dynamic);
@@ -3551,6 +3552,7 @@ class HScriptPreset {
 		instance.set('FlxAnimate', flxanimate.FlxAnimate);
 		instance.set('StringTools', StringTools);
 		instance.set('CoolUtil', CoolUtil);
+		instance.set('FlxTween', FlxTween);
 
 		for (name in ['DialogueBox', 'DialogueBoxPsych']){
 			instance.set(name, DialogueBoxPsych);
