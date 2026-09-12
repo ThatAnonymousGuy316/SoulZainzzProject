@@ -293,7 +293,7 @@ function updateTracklist(index:Int)
         songNames.push(leWeek.songs[i][0]);
     }
 
-    var listText:String = songNames.join('\n');
+    var listText:String = songNames.join('\n\n');
     txtTracklist.text = listText.toUpperCase();
     txtTracklist.y = tracklistY;
 }
