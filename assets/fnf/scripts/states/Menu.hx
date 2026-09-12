@@ -68,6 +68,7 @@ function onState()
     boyfriend.frames = Paths.getSparrowAtlas('characters/rodentrap');
     boyfriend.animation.addByPrefix('idle', 'BF idle dance0', 24, true);
     boyfriend.animation.addByPrefix('idle-alt', 'BF idle dance ALT', 24, true);
+    boyfriend.animation.addByPrefix('selected', 'BF HEY!!', 24, true);
     if (FlxG.random.int(1, 10) == 1){
         boyfriend.animation.play('idle-alt');
     }else{
