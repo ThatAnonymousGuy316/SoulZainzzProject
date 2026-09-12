@@ -121,7 +121,7 @@ class OptionsState extends MusicBeatState
 			if (fromPlayState){
 				LoadingState.loadAndSwitchState(new PlayState());
 			}else{
-				MusicBeatState.switchState(new MainMenuState());
+				MusicBeatState.switchState(new HScriptedState(GameConfig.MainMenu));
 			}
 		}
 

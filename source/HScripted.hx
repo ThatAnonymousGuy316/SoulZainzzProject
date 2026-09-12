@@ -13,38 +13,60 @@ class HScriptedState extends MusicBeatState
     override function create(){
         super.create();
         for (i in GameConfig.hxExts){
-            stateScript = new FunkinHScript(Paths.modFolders('scripts/states/${StateScriptPath}.${i}'));
-            for (name in ['this', 'instance', '_state_']){
-                stateScript.set(name, this);
+            if (sys.FileSystem.exists(Paths.modFolders('scripts/states/${StateScriptPath}.${i}'))){
+                stateScript = new FunkinHScript(Paths.modFolders('scripts/states/${StateScriptPath}.${i}'));
+                for (name in ['this', 'instance', '_state_']){
+                    stateScript.set(name, this);
+                }
+                stateScript.set('controls', controls);
+                stateScript.call('onState', []);
             }
-            stateScript.set('controls', controls);
-            stateScript.call('onState', []);
         }
     }
 
+    override public function onFocusLost():Void {
+        if (stateScript != null)
+            stateScript.call('onFocusLost', []);
+        super.onFocusLost();
+    }
+
+    override public function onFocus():Void {
+        if (stateScript != null)
+            stateScript.call('onFocus', []);
+        super.onFocus();
+    }
+
+
     override function destroy(){
-        stateScript.destroy();
+        if (stateScript != null){
+            stateScript.call('onDestroy', []);
+            stateScript.destroy();
+        }
         super.destroy();
     }
 
     override function update(elapsed:Float){
         super.update(elapsed);
-
-        stateScript.call('onUpdate', [elapsed]);
+        if (stateScript != null)
+            stateScript.call('onUpdate', [elapsed]);
     }
 
     override public function stepHit():Void
 	{
 		super.stepHit();
-        stateScript.set('curStep', curStep);
-        stateScript.call('onStepHit', []);
+        if (stateScript != null){
+            stateScript.set('curStep', curStep);
+            stateScript.call('onStepHit', []);
+        }
 	}
 
 	override public function beatHit():Void
 	{
 		super.beatHit();
-        stateScript.set('curBeat', curBeat);
-        stateScript.call('onBeatHit', []);
+        if (stateScript != null){
+            stateScript.set('curBeat', curBeat);
+            stateScript.call('onBeatHit', []);
+        }
 	}
 }
 
@@ -61,40 +83,52 @@ class HScriptedSubState extends MusicBeatSubstate
     override function create(){
         super.create();
         for (i in GameConfig.hxExts){
-            stateScript = new FunkinHScript(Paths.modFolders('scripts/states/substates/${StateScriptPath}.${i}'));
-            for (name in ['this', 'instance', '_state_']){
-                stateScript.set(name, this);
+            if (sys.FileSystem.exists(Paths.modFolders('scripts/states/substates/${StateScriptPath}.${i}'))){
+                stateScript = new FunkinHScript(Paths.modFolders('scripts/states/substates/${StateScriptPath}.${i}'));
+                for (name in ['this', 'instance', '_substate_']){
+                    stateScript.set(name, this);
+                }
+                stateScript.set('controls', controls);
+                stateScript.set('addToSubState', this.add);
+                stateScript.set('insertToSubState', this.insert);
+                stateScript.set('removeFromSubState', this.remove);
+                stateScript.set('close', function(){
+                    close();
+                });
+                stateScript.call('onSubState', []);
             }
-            stateScript.set('controls', controls);
-            stateScript.set('close', function(){
-                close();
-            });
-            stateScript.call('onState', []);
         }
     }
 
     override function destroy(){
-        stateScript.destroy();
+        if (stateScript != null){
+            stateScript.call('onDestroy', []);
+            stateScript.destroy();
+        }
         super.destroy();
     }
 
     override function update(elapsed:Float){
         super.update(elapsed);
-
-        stateScript.call('onUpdate', [elapsed]);
+        if (stateScript != null)
+            stateScript.call('onUpdate', [elapsed]);
     }
 
     override public function stepHit():Void
 	{
 		super.stepHit();
-        stateScript.set('curStep', curStep);
-        stateScript.call('onStepHit', []);
+        if (stateScript != null){
+            stateScript.set('curStep', curStep);
+            stateScript.call('onStepHit', []);
+        }
 	}
 
 	override public function beatHit():Void
 	{
 		super.beatHit();
-        stateScript.set('curBeat', curBeat);
-        stateScript.call('onBeatHit', []);
+        if (stateScript != null){
+            stateScript.set('curBeat', curBeat);
+            stateScript.call('onBeatHit', []);
+        }
 	}
 }

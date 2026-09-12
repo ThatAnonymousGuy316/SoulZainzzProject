@@ -108,7 +108,7 @@ class MasterEditorMenu extends MusicBeatState
 
 		if (controls.BACK)
 		{
-			MusicBeatState.switchState(new MainMenuState());
+			MusicBeatState.switchState(new HScriptedState(GameConfig.MainMenu));
 		}
 
 		if (controls.ACCEPT)

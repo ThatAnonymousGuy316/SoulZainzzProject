@@ -1,4 +1,11 @@
 {
+    "StateLoaders": {
+        "InitialState": "Title",
+        "MainMenu": "Menu",
+        "StoryMenu": "Story",
+        "Freeplay": "Freeplay",
+        "Pause": "Pause"
+    },
     "WindowTitle": "Friday Night Funkin': SoulZainzz Engine",
     "WindowIcon": "SoulZainzzIcon",
     "LogoPath": "SoulZainzzLogo",

@@ -216,7 +216,6 @@ class FunkinLua {
 		set('scrollSpeed', PlayState.SONG.speed);
 		set('crochet', Conductor.crochet);
 		set('stepCrochet', Conductor.stepCrochet);
-		set('songLength', FlxG.sound.music.length);
 		set('songName', PlayState.SONG.song);
 		set('songPath', Paths.formatToSongPath(PlayState.SONG.song));
 		set('startedCountdown', false);
@@ -3546,13 +3545,23 @@ class HScriptPreset {
 		instance.set('FlxSpriteGroup', flixel.group.FlxSpriteGroup);
 		instance.set('FlxTypedGroup', flixel.group.FlxGroup.FlxTypedGroup);
 		instance.set('mouse', flixel.FlxG.mouse);
+		instance.set('OpenflMouse', openfl.ui.Mouse);
 		instance.set('save', flixel.FlxG.save);
 		instance.set('saveData', flixel.FlxG.save.data);
 		instance.set('FlxBackdrop', flixel.addons.display.FlxBackdrop);
 		instance.set('FlxAnimate', flxanimate.FlxAnimate);
 		instance.set('StringTools', StringTools);
 		instance.set('CoolUtil', CoolUtil);
-		instance.set('FlxTween', FlxTween);
+		instance.set('FlxSound', FlxSound);
+		instance.set('FlxText', FlxText);
+		instance.set('MusicBeatState', MusicBeatState);
+		instance.set('MusicBeatSubstate', MusicBeatSubstate);
+		instance.set('Highscore', Highscore);
+		instance.set('WeekData', WeekData);
+		instance.set('StageData', StageData);
+		instance.set('Song', Song);
+
+		instance.set('LoadingState', LoadingState);
 
 		for (name in ['DialogueBox', 'DialogueBoxPsych']){
 			instance.set(name, DialogueBoxPsych);
@@ -3583,6 +3592,106 @@ class HScriptPreset {
 		instance.set("exit", function(){
             Sys.exit(0);
         });
+
+		instance.set('switchState', function(daState:String){
+			MusicBeatState.switchState(new HScriptedState(daState));
+		});
+
+		instance.set('goToOptions', function(isPlayState:Bool){
+			LoadingState.loadAndSwitchState(new options.OptionsState(isPlayState));
+		});
+
+		instance.set('DiscordClient', Discord.DiscordClient);
+
+		instance.set('goToChartEditor', function(){
+			LoadingState.loadAndSwitchState(new editors.ChartingState(), false);
+		});
+
+		instance.set('goToEditorSelect', function(){
+			MusicBeatState.switchState(new editors.MasterEditorMenu());
+		});
+
+		instance.set('openSubState', function(daState:String){
+			FlxG.state.openSubState(new HScriptedSubState(daState));
+		});
+
+		instance.set('openGameplayChangers', function(){
+			FlxG.state.openSubState(new GameplayChangersSubstate());
+		});
+
+		instance.set("FlxCameraFollowStyle", {
+			LOCKON: flixel.FlxCamera.FlxCameraFollowStyle.LOCKON,
+			PLATFORMER: flixel.FlxCamera.FlxCameraFollowStyle.PLATFORMER,
+			TOPDOWN: flixel.FlxCamera.FlxCameraFollowStyle.TOPDOWN,
+			TOPDOWN_TIGHT: flixel.FlxCamera.FlxCameraFollowStyle.TOPDOWN_TIGHT,
+			SCREEN_BY_SCREEN: flixel.FlxCamera.FlxCameraFollowStyle.SCREEN_BY_SCREEN,
+			NO_DEAD_ZONE: flixel.FlxCamera.FlxCameraFollowStyle.NO_DEAD_ZONE,
+
+		});
+		instance.set("FlxTextBorderStyle", {
+			NONE: flixel.text.FlxText.FlxTextBorderStyle.NONE,
+			SHADOW: flixel.text.FlxText.FlxTextBorderStyle.SHADOW,
+			OUTLINE: flixel.text.FlxText.FlxTextBorderStyle.OUTLINE,
+			OUTLINE_FAST: flixel.text.FlxText.FlxTextBorderStyle.OUTLINE_FAST
+		});
+		instance.set("FlxTextAlign", {
+			CENTER: flixel.text.FlxText.FlxTextAlign.CENTER,
+			JUSTIFY: flixel.text.FlxText.FlxTextAlign.JUSTIFY,
+			LEFT: flixel.text.FlxText.FlxTextAlign.LEFT,
+			RIGHT: flixel.text.FlxText.FlxTextAlign.RIGHT
+		});
+		instance.set("setTxtFormat", function(txt:flixel.text.FlxText, ?Font:String, Size:Int = 8, Color:FlxColor = FlxColor.WHITE, ?Alignment:flixel.text.FlxText.FlxTextAlign, ?BorderStyle:flixel.text.FlxText.FlxTextBorderStyle, BorderColor:FlxColor = FlxColor.TRANSPARENT, EmbeddedFont:Bool = true){
+			txt.setFormat(Font, Size, Color, Alignment, BorderStyle, BorderColor, EmbeddedFont);
+		});
+
+		instance.set("FlxAxes", {
+			X: flixel.util.FlxAxes.X,
+			Y: flixel.util.FlxAxes.Y,
+			XY: flixel.util.FlxAxes.XY
+		});
+
+        instance.set("FlxBarFillDirection", {
+            LEFT_TO_RIGHT: flixel.ui.FlxBar.FlxBarFillDirection.LEFT_TO_RIGHT,
+            RIGHT_TO_LEFT: flixel.ui.FlxBar.FlxBarFillDirection.RIGHT_TO_LEFT,
+            TOP_TO_BOTTOM: flixel.ui.FlxBar.FlxBarFillDirection.TOP_TO_BOTTOM,
+            BOTTOM_TO_TOP: flixel.ui.FlxBar.FlxBarFillDirection.BOTTOM_TO_TOP,
+            HORIZONTAL_INSIDE_OUT: flixel.ui.FlxBar.FlxBarFillDirection.HORIZONTAL_INSIDE_OUT,
+            HORIZONTAL_OUTSIDE_IN: flixel.ui.FlxBar.FlxBarFillDirection.HORIZONTAL_OUTSIDE_IN,
+            VERTICAL_INSIDE_OUT: flixel.ui.FlxBar.FlxBarFillDirection.VERTICAL_INSIDE_OUT,
+            VERTICAL_OUTSIDE_IN: flixel.ui.FlxBar.FlxBarFillDirection.VERTICAL_OUTSIDE_IN
+        });
+
+        instance.set('FlxHorizontalAlign', {
+            LEFT: flixel.util.FlxHorizontalAlign.LEFT,
+            CENTER: flixel.util.FlxHorizontalAlign.CENTER,
+            RIGHT: flixel.util.FlxHorizontalAlign.RIGHT
+        });
+
+        instance.set('FlxVerticalAlign', {
+            TOP: flixel.util.FlxVerticalAlign.TOP,
+            CENTER: flixel.util.FlxVerticalAlign.CENTER,
+            BOTTOM: flixel.util.FlxVerticalAlign.BOTTOM
+        });
+
+		instance.set('MouseCursor', {
+            ARROW: lime.ui.MouseCursor.ARROW,
+			CROSSHAIR: lime.ui.MouseCursor.CROSSHAIR,
+			DEFAULT: lime.ui.MouseCursor.DEFAULT,
+			MOVE: lime.ui.MouseCursor.MOVE,
+			POINTER: lime.ui.MouseCursor.POINTER,
+			RESIZE_NESW: lime.ui.MouseCursor.RESIZE_NESW,
+			RESIZE_NS: lime.ui.MouseCursor.RESIZE_NS,
+			RESIZE_NWSE: lime.ui.MouseCursor.RESIZE_NWSE,
+			RESIZE_WE: lime.ui.MouseCursor.RESIZE_WE,
+			TEXT: lime.ui.MouseCursor.TEXT,
+			WAIT: lime.ui.MouseCursor.WAIT,
+			WAIT_ARROW: lime.ui.MouseCursor.WAIT_ARROW,
+			CUSTOM: lime.ui.MouseCursor.CUSTOM,
+        });
+
+		instance.set('setCursor', function(a:lime.ui.MouseCursor){
+			openfl.ui.Mouse.cursor = a;
+		});
 
 		if (flixel.FlxG.state == PlayState.instance){
 			instance.set("play", PlayState.instance);

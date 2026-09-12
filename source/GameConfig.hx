@@ -7,6 +7,7 @@ import sys.FileSystem;
 using StringTools;
 
 typedef GameConfigJson = {
+    var StateLoaders:States;
     var WindowTitle:String;
     var WindowIcon:String;
     var LogoPath:String;
@@ -18,6 +19,14 @@ typedef Extensions = {
     var lua:Array<String>;
     var haxe:Array<String>;
     var swift:Array<String>;
+}
+
+typedef States = {
+    var InitialState:String;
+    var MainMenu:String;
+    var StoryMenu:String;
+    var Freeplay:String;
+    var Pause:String;
 }
 
 class GameConfig
@@ -42,7 +51,11 @@ class GameConfig
     public static var luaExts = ['lua'];
     public static var hxExts = ['hx', 'hxs', 'hscript'];
     public static var swiftExts = ['swift'];
-
+    public static var InitialState:String;
+    public static var MainMenu:String;
+    public static var StoryMenu:String;
+    public static var Freeplay:String;
+    public static var Pause:String;
     public static var botplayText = '[BOTPLAY]';
 
     public static var gameConfig:GameConfigJson;
@@ -70,6 +83,14 @@ class GameConfig
 
     public static function getLogoPath(){
         return gameConfig.LogoPath;
+    }
+
+    public static function getInitialState(){
+        InitialState = gameConfig.StateLoaders.InitialState;
+        MainMenu = gameConfig.StateLoaders.MainMenu;
+        StoryMenu = gameConfig.StateLoaders.StoryMenu;
+        Freeplay = gameConfig.StateLoaders.Freeplay;
+        Pause = gameConfig.StateLoaders.Pause;
     }
 
     public static function getPlugins(){
