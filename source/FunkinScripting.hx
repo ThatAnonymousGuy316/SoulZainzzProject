@@ -252,8 +252,7 @@ class FunkinLua {
 		set('rating', 0);
 		set('ratingName', '');
 		set('ratingFC', '');
-		set('version', MainMenuState.psychEngineVersion.trim());
-		set('versionSZE', MainMenuState.soulZainzzVersion.trim());
+		set('version', Main.engineVersion.trim());
 
 		set('inGameOver', false);
 		set('mustHitSection', false);
@@ -1667,11 +1666,6 @@ class FunkinLua {
 			PlayState.instance.endSong();
 			return true;
 		});
-		Lua_helper.add_callback(lua, "restartSong", function(?skipTransition:Bool = false) {
-			PlayState.instance.persistentUpdate = false;
-			PauseSubState.restartSong(skipTransition);
-			return true;
-		});
 		Lua_helper.add_callback(lua, "exitSong", function(?skipTransition:Bool = false) {
 			if(skipTransition)
 			{
@@ -1684,10 +1678,10 @@ class FunkinLua {
 			if(FlxTransitionableState.skipNextTransIn)
 				CustomFadeTransition.nextCamera = null;
 
-			if(PlayState.isStoryMode)
-				MusicBeatState.switchState(new StoryMenuState());
+			if (PlayState.isStoryMode)
+				MusicBeatState.switchState(new HScriptedState(GameConfig.StoryMenu));
 			else
-				MusicBeatState.switchState(new FreeplayState());
+				MusicBeatState.switchState(new HScriptedState(GameConfig.Freeplay));
 
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			PlayState.changedDifficulty = false;
