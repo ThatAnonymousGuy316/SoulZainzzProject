@@ -2682,9 +2682,12 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene)
+		if (!isCountdown)
 		{
-			openChartEditor();
+			if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene)
+			{
+				openChartEditor();
+			}
 		}
 
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
@@ -2722,11 +2725,14 @@ class PlayState extends MusicBeatState
 		else
 			iconP2.animation.curAnim.curFrame = 0;
 
-		if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene) {
-			persistentUpdate = false;
-			paused = true;
-			cancelMusicFadeTween();
-			MusicBeatState.switchState(new CharacterEditorState(SONG.player2));
+		if (!isCountdown)
+		{
+			if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene) {
+				persistentUpdate = false;
+				paused = true;
+				cancelMusicFadeTween();
+				MusicBeatState.switchState(new CharacterEditorState(SONG.player2));
+			}
 		}
 		
 		if (startedCountdown)
@@ -2957,14 +2963,17 @@ class PlayState extends MusicBeatState
 		}
 		checkEventNote();
 
-		if(!endingSong && !startingSong && chartingMode) {
-			if (FlxG.keys.justPressed.TWO) {
-				KillNotes();
-				FlxG.sound.music.onComplete();
-			}
-			if(FlxG.keys.justPressed.ONE) { //Go 5 seconds into the future :O
-				setSongTime(Conductor.songPosition + 5000);
-				clearNotesBefore(Conductor.songPosition);
+		if (!isCountdown)
+		{
+			if(!endingSong && !startingSong && chartingMode) {
+				if (FlxG.keys.justPressed.TWO) {
+					KillNotes();
+					FlxG.sound.music.onComplete();
+				}
+				if(FlxG.keys.justPressed.ONE) { //Go 5 seconds into the future :O
+					setSongTime(Conductor.songPosition + 5000);
+					clearNotesBefore(Conductor.songPosition);
+				}
 			}
 		}
 
