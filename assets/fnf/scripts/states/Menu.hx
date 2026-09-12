@@ -114,6 +114,7 @@ function onUpdate(elapsed)
 
     if (mouse.overlaps(boyfriend))
     {
+        mouse.createPointer();
         if (mouse.justPressed)
         {
             FlxTween.tween(boyfriend.scale, {x: 1.1, y: 1.1}, 0.05, {
@@ -124,6 +125,8 @@ function onUpdate(elapsed)
                 }
             });
         }
+    }else{
+        mouse.createDefault();
     }
 
     if (controls.UI_UP_P)

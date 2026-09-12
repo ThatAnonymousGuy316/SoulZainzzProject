@@ -1690,6 +1690,13 @@ class ChartingState extends MusicBeatState
 			}
 		}
 
+		if (FlxG.mouse.overlaps(curRenderedNotes))
+			FlxG.mouse.createPointer();
+		else if (FlxG.mouse.overlaps(gridBG))
+			FlxG.mouse.createCell();
+		else
+			FlxG.mouse.createDefault();
+
 		var blockInput:Bool = false;
 		for (inputText in blockPressWhileTypingOn) {
 			if(inputText.hasFocus) {

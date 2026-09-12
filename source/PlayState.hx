@@ -2113,7 +2113,7 @@ class PlayState extends MusicBeatState
 
 	public function updateScore(miss:Bool = false)
 	{
-		var textStrings = ['Score', 'Combo Breaks', 'Accuracy'];
+		var textStrings = ['Score', 'Misses', 'Accuracy'];
 		var textStringsMisc = ['|', ':'];
 
 		if (ratingName != '?'){
@@ -4218,6 +4218,7 @@ class PlayState extends MusicBeatState
 			if (note.isSustainNote)
 			{
 				songScore += 25;
+				updateScore(true);
 			}
 			health += note.hitHealth * healthGain;
 

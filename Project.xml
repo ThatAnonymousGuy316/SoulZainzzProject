@@ -69,6 +69,7 @@
 	<assets path="assets"         library="assets"         exclude="*.mp3" unless="web"/>
 	
 	<assets path='_config'/>
+	<assets path='_cursor' embed='true'/>
 	<assets path='root' rename=''/>
 	<assets path='art/readme.txt' rename='do NOT readme.txt' />
 	<!-- <template path='mods' /> -->

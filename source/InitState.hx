@@ -52,7 +52,7 @@ class InitState extends MusicBeatState
 		PlayerSettings.init();
 
         FlxG.mouse.visible = false;
-        FlxG.mouse.useSystemCursor = true;
+        FlxG.mouse.useSystemCursor = false;
 
         FlxG.save.bind('soulzainzz', 'irissoulWuzzainzz');
 

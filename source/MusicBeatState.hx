@@ -67,6 +67,19 @@ class MusicBeatState extends FlxUIState
 
 		if(FlxG.save.data != null) FlxG.save.data.fullscreen = FlxG.fullscreen;
 
+		if (FlxG.mouse.visible)
+		{
+			if (FlxG.mouse.justPressed)
+			{
+				FlxG.sound.play(Paths.sound('chartingSounds/ClickUp'));
+			}
+
+			if (FlxG.mouse.justPressedRight)
+			{
+				FlxG.sound.play(Paths.sound('chartingSounds/ClickDown'));
+			}
+		}
+
 		super.update(elapsed);
 	}
 
