@@ -3584,6 +3584,16 @@ class HScriptPreset {
 		instance.set("insert", FlxG.state.insert);
 		instance.set("remove", FlxG.state.remove);
 
+		instance.set('isMobile', function(){
+			return GameConfig.isMobile;
+		});
+
+		instance.set('openMobileSubstate', function(){
+			#if mobileC
+			FlxG.state.openSubState(new mobile.MobileControlsSubState());
+			#end
+		});
+
 		instance.set('Reflect', Reflect);
 
 		instance.set("playMusic", function(sound:String, volume:Float = 1, loop:Bool = false) {

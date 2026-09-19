@@ -62,18 +62,34 @@ function onState()
     options.antialiasing = ClientPrefs.globalAntialiasing;
     add(options);
 
-    boyfriend = new FlxSprite(760, 150);
-    boyfriend.frames = Paths.getSparrowAtlas('characters/rodentrap');
-    boyfriend.animation.addByPrefix('idle', 'BF idle dance0', 24, true);
-    boyfriend.animation.addByPrefix('idle-alt', 'BF idle dance ALT', 24, true);
-    boyfriend.animation.addByPrefix('selected', 'BF HEY!!', 24, true);
-    if (FlxG.random.int(1, 10) == 1){
-        boyfriend.animation.play('idle-alt');
-    }else{
+    if (isVee()){
+        boyfriend = new FlxSprite(500, 0);
+        boyfriend.frames = Paths.getSparrowAtlas('characters/Vee');
+        boyfriend.animation.addByPrefix('idle', 'Idle0', 24, true);
         boyfriend.animation.play('idle');
+        boyfriend.antialiasing = ClientPrefs.globalAntialiasing;
+        add(boyfriend);
+    }else if (isDSides()){
+        boyfriend = new FlxSprite(760, 150);
+        boyfriend.frames = Paths.getSparrowAtlas('characters/DSidesBF');
+        boyfriend.animation.addByPrefix('idle', 'BFIdle0', 24, true);
+        boyfriend.animation.play('idle');
+        boyfriend.antialiasing = ClientPrefs.globalAntialiasing;
+        add(boyfriend);
+    }else{
+        boyfriend = new FlxSprite(760, 150);
+        boyfriend.frames = Paths.getSparrowAtlas('characters/rodentrap');
+        boyfriend.animation.addByPrefix('idle', 'BF idle dance0', 24, true);
+        boyfriend.animation.addByPrefix('idle-alt', 'BF idle dance ALT', 24, true);
+        boyfriend.animation.addByPrefix('selected', 'BF HEY!!', 24, true);
+        if (FlxG.random.int(1, 10) == 1){
+            boyfriend.animation.play('idle-alt');
+        }else{
+            boyfriend.animation.play('idle');
+        }
+        boyfriend.antialiasing = ClientPrefs.globalAntialiasing;
+        add(boyfriend);
     }
-    boyfriend.antialiasing = ClientPrefs.globalAntialiasing;
-    add(boyfriend);
 
     menuItems = [storyMenu, freeplay, options];
 
@@ -83,6 +99,16 @@ function onState()
     playMusic('stayFunky/stayFunky');
 
     addDPad();
+}
+
+function isVee(){
+    //return true;
+    return FlxG.random.int(1, 25) == 25;
+}
+
+function isDSides(){
+    //return true;
+    return FlxG.random.int(1, 15) == 15;
 }
 
 function onUpdate(elapsed)
@@ -175,7 +201,7 @@ function confirmSelection()
         case 2:
             swipeOut(options, [storyMenu, freeplay], menuBG, function()
             {
-                switchState('Options');
+                switchState('Options', [false]);
             });
             swipeDown(boyfriend);
     }

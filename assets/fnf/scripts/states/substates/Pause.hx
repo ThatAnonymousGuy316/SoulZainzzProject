@@ -31,9 +31,10 @@ function onSubState()
 
     resume = makeMenuText("Resume", 0);
     restartSong = makeMenuText("Restart Song", 1);
-    exit = makeMenuText("Exit", 2);
+    options = makeMenuText("Options", 2);
+    exit = makeMenuText("Exit", 3);
 
-    menuItems = [resume, restartSong, exit];
+    menuItems = [resume, restartSong, options, exit];
     curSelected = 0;
     updateSelection();
 
@@ -83,6 +84,8 @@ function confirmSelection()
         case 1:
             MusicBeatState.resetState();
         case 2:
+            switchState('Options', [true]);
+        case 3:
             if (PlayState.isStoryMode){
                 switchState("Story");
             }else{

@@ -363,7 +363,7 @@ class NoteOffsetState extends MusicBeatState
 
 			persistentUpdate = false;
 			CustomFadeTransition.nextCamera = camOther;
-			MusicBeatState.switchState(new HScriptedState(GameConfig.Options));
+			MusicBeatState.switchState(new HScriptedState(GameConfig.Options, [false]));
 			FlxG.mouse.visible = false;
 		}
 

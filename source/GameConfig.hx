@@ -60,6 +60,8 @@ class GameConfig
     public static var Options:String;
     public static var botplayText = '[BOTPLAY]';
 
+    public static var isMobile:Bool = false; // FOR HSCRIPT
+
     public static var gameConfig:GameConfigJson;
 
     public static var pluginArray:Array<FunkinHScript> = [];
@@ -67,6 +69,11 @@ class GameConfig
     public static function initJson(){
         gameConfig = Json.parse(sys.io.File.getContent(SUtil.getStorageDirectory() + 'config/GameConfig.json'));
         botplayText = gameConfig.BotplayText;
+        #if mobileC
+        isMobile = true;
+        #else
+        isMobile = false;
+        #end
     }
 
     public static function setExts(){

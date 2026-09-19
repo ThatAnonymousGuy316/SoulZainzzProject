@@ -72,8 +72,16 @@ class MusicBeatState extends FlxUIState
 
 		mobileControls = new MobileControls();
 
-		//controls.setVirtualPadNOTES(mobileControls.virtualPad, NONE, P);
-		controls.setHitBox(mobileControls.hitbox);
+		switch (MobileControls.mode)
+		{
+			case 'Pad-Right' | 'Pad-Left' | 'Pad-Custom':
+				controls.setVirtualPadNOTES(mobileControls.virtualPad, RIGHT_FULL, NONE);
+			case 'Pad-Duo':
+				controls.setVirtualPadNOTES(mobileControls.virtualPad, BOTH_FULL, NONE);
+			case 'Hitbox':
+				controls.setHitBox(mobileControls.hitbox);
+			case 'Keyboard': // do nothing
+		}
 
 		trackedInputsMobileControls = controls.trackedInputsNOTES;
 		controls.trackedInputsNOTES = [];

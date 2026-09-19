@@ -36,7 +36,7 @@ class MobileControls extends FlxSpriteGroup
 			case 'Pad-Duo':
 				virtualPad = new FlxVirtualPad(BOTH_FULL, NONE);
 				add(virtualPad);
-			case 'c':
+			case 'Hitbox':
 				hitbox = new FlxHitbox(4, Std.int(FlxG.width / 4), FlxG.height, [0xFF00FF, 0x00FFFF, 0x00FF00, 0xFF0000]);
 				add(hitbox);
 			case 'Keyboard': // do nothing
@@ -62,10 +62,10 @@ class MobileControls extends FlxSpriteGroup
 			FlxG.save.flush();
 		}
 
-		return 'Hitbox';
+		return FlxG.save.data.controlsMode;
 	}
 
-	private static function set_mode(mode:String = 'Hitbox'):String
+	private static function set_mode(mode:String = 'Pad-Right'):String
 	{
 		FlxG.save.data.controlsMode = mode;
 		FlxG.save.flush();

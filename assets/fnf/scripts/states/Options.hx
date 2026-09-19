@@ -32,8 +32,21 @@ var startY = 120;
 var spacing = 50;
 var maxVisibleOptions = 10;
 
-function onState()
+var onPlayState:Bool = false;
+
+function onState(inPlayState)
 {
+    if (isMobile()){
+        prefs.remove('Controls');
+        prefs.push('Mobile');
+    }
+
+    onPlayState = inPlayState;
+
+    if (onPlayState){
+        prefs.remove('Adjust Combo & Offset');
+    }
+    
     DiscordClient.changePresence("Title Screen", null);
 
     add(new FlxSprite().loadGraphic(Paths.image('menuBGBlue')));
@@ -65,7 +78,11 @@ function onUpdate(elapsed)
         if (controls.BACK)
         {
             ClientPrefs.saveSettings();
-            switchState('Menu');
+            if (onPlayState){
+                LoadingState.loadAndSwitchState(new PlayState());
+            }else{
+                switchState('Menu');
+            }
         }
     }
 }
@@ -94,6 +111,8 @@ function selectCategory()
             openNoteColors();
         case 'Adjust Combo & Offset':
             openNoteOffset();
+        case 'Mobile':
+            openMobileSubstate();
         case 'Visuals':
             openSubMenu('Visuals', generateVisualsPrefs);
         case 'Gameplay':
