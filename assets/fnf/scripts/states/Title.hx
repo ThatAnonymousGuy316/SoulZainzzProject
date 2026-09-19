@@ -5,8 +5,6 @@ var logoScale:Float = 0.75;
 
 var floatshit:Float = 0;
 
-var freakyMenu:FlxSound;
-
 function onState()
 {   
     mouse.visible = false;
@@ -21,29 +19,16 @@ function onState()
     logo.scale.set(logoScale, logoScale);
     add(logo);
 
-    freakyMenu = new FlxSound().loadEmbedded(Paths.music('freakyMenu'));
-    freakyMenu.volume = 0.5;
-    freakyMenu.play();
-}
+    playMusic('freakyMenu');
 
-function onDestroy()
-{
-    freakyMenu.stop();
-    freakyMenu.destroy();
-}
-
-function onFocus(){
-    freakyMenu.play();
-}
-
-function onFocusLost(){
-    freakyMenu.pause();
+    addDPad();
 }
 
 function onUpdate(elapsed)
 {
     floatshit += 0.1;
-    logo.y += Math.sin(floatshit);
+    plusYSprite(logo, Math.sin(floatshit));
+    switchFromTitleonMobile(); // DONT MESS WITH THIS :/
     if (controls.ACCEPT){
         switchState('Menu');
     }

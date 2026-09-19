@@ -24,7 +24,7 @@ import openfl.ui.MouseCursor;
 import flash.ui.MouseCursorData;
 #end
 
-@:bitmap("_cursor/cursor-default.png")
+@:bitmap("cursor/cursor-default.png")
 private class GraphicCursor extends BitmapData {}
 
 /**
@@ -252,22 +252,22 @@ class FlxMouse extends FlxPointer implements IFlxInputManager
 
 	public function createCell()
 	{
-		load("_cursor/cursor-cell.png");
+		load("cursor/cursor-cell.png");
 	}
 
 	public function createPointer()
 	{
-		load("_cursor/cursor-pointer.png");
+		load("cursor/cursor-pointer.png");
 	}
 
 	public function createGrab()
 	{
-		load("_cursor/cursor-grabbing.png");
+		load("cursor/cursor-grabbing.png");
 	}
 
 	public function createDefault()
 	{
-		load("_cursor/cursor-default.png");
+		load("cursor/cursor-default.png");
 	}
 
 	/**

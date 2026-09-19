@@ -27,6 +27,7 @@ typedef States = {
     var StoryMenu:String;
     var Freeplay:String;
     var Pause:String;
+    var Options:String;
 }
 
 class GameConfig
@@ -56,6 +57,7 @@ class GameConfig
     public static var StoryMenu:String;
     public static var Freeplay:String;
     public static var Pause:String;
+    public static var Options:String;
     public static var botplayText = '[BOTPLAY]';
 
     public static var gameConfig:GameConfigJson;
@@ -63,7 +65,7 @@ class GameConfig
     public static var pluginArray:Array<FunkinHScript> = [];
 
     public static function initJson(){
-        gameConfig = Json.parse(sys.io.File.getContent('_config/GameConfig.json'));
+        gameConfig = Json.parse(sys.io.File.getContent(SUtil.getStorageDirectory() + 'config/GameConfig.json'));
         botplayText = gameConfig.BotplayText;
     }
 
@@ -91,6 +93,7 @@ class GameConfig
         StoryMenu = gameConfig.StateLoaders.StoryMenu;
         Freeplay = gameConfig.StateLoaders.Freeplay;
         Pause = gameConfig.StateLoaders.Pause;
+        Options = gameConfig.StateLoaders.Options;
     }
 
     public static function getPlugins(){

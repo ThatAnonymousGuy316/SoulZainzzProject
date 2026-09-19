@@ -27,7 +27,7 @@ using StringTools;
 
 class Paths
 {
-	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
+	inline public static var SOUND_EXT = "ogg";
 	inline public static var VIDEO_EXT = "mp4";
 
 	#if MODS_ALLOWED
@@ -55,11 +55,8 @@ class Paths
 	public static function changeIconFromGraphic(graphic:FlxGraphic):Void
 	{
 		#if desktop
-		// Check if the graphic and its underlying OpenFL bitmap data exist
 		if (graphic != null && graphic.bitmap != null && FlxG.stage.window != null)
 		{
-			// OpenFL's BitmapData has an underlying .image property 
-			// which contains the raw Lime Image required by the window manager
 			var limeImage:Image = graphic.bitmap.image;
 			
 			if (limeImage != null)
@@ -405,13 +402,10 @@ class Paths
 		// trace(gottenPath);
 		if(!currentTrackedSounds.exists(gottenPath))
 		#if MODS_ALLOWED
-			currentTrackedSounds.set(gottenPath, Sound.fromFile('./' + gottenPath));
+			currentTrackedSounds.set(gottenPath, Sound.fromFile(#if !mobile './' + #end gottenPath));
 		#else
 		{
-			var folder:String = '';
-			if(path == 'songs') folder = 'songs:';
-
-			currentTrackedSounds.set(gottenPath, OpenFlAssets.getSound(folder + getPath('$path/$key.$SOUND_EXT', SOUND, library)));
+			currentTrackedSounds.set(gottenPath, OpenFlAssets.getSound(getPath('$path/$key.$SOUND_EXT', SOUND, library)));
 		}
 		#end
 		localTrackedAssets.push(gottenPath);
@@ -420,7 +414,7 @@ class Paths
 
 	#if MODS_ALLOWED
 	inline static public function mods(key:String = '') {
-		return 'assets/' + key;
+		return SUtil.getStorageDirectory() + 'assets/' + key;
 	}
 
 	inline static public function modsFont(key:String) {
@@ -476,7 +470,7 @@ class Paths
 
 		for (mod in globalMods)
 		{
-			var fileToCheck:String = 'assets/' + mod + '/' + key;
+			var fileToCheck:String = SUtil.getStorageDirectory() + 'assets/' + mod + '/' + key;
 
 			if (FileSystem.exists(fileToCheck))
 				return fileToCheck;
@@ -512,11 +506,11 @@ class Paths
 	{
 		globalMods = [];
 
-		if (FileSystem.exists('assets'))
+		if (FileSystem.exists(SUtil.getStorageDirectory() + 'assets'))
 		{
-			for (folder in FileSystem.readDirectory('assets'))
+			for (folder in FileSystem.readDirectory(SUtil.getStorageDirectory() + 'assets'))
 			{
-				var path:String = 'assets/' + folder;
+				var path:String = SUtil.getStorageDirectory() + 'assets/' + folder;
 
 				if (FileSystem.isDirectory(path))
 					globalMods.push(folder);

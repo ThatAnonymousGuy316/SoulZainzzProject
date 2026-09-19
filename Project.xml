@@ -2,7 +2,7 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="" file="SoulZainzz" packageName="com.irissoulWuzzainzz.soulzainzz" package="com.irissoulWuzzainzz.soulzainzz" main="Main" version="0.2.8" company="IrisSoulWuzZainzz" />
+	<app title="" file="SoulZainzz" packageName="SoulZainzz" package="com.irissoulWuzzainzz.soulzainzz" main="Main" version="0.2.8" company="IrisSoulWuzZainzz" />
 
 	<!--Switch Export with Unique ApplicationID and Icon-->
 	<set name="APP_ID" value="0x0100f6c013bbc000" />
@@ -21,7 +21,7 @@
 	<!-- ____________________________ Window Settings ___________________________ -->
 
 	<!--These window settings apply to all targets-->
-	<window width="1280" height="720" fps="" background="#000000" hardware="true" vsync="false" />
+	<window width="1280" height="720" background="#000000" hardware="true" vsync="false" />
 
 	<!--HTML5-specific-->
 	<window if="html5" resizable="true" />
@@ -30,7 +30,7 @@
 	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" vsync="false"/>
 
 	<!--Mobile-specific-->
-	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" resizable="false"/>
+	<window if="mobile" orientation="landscape" fullscreen="true" resizable="false" allow-shaders="true" require-shaders="true"/>
 
 	<!--Switch-specific-->
 	<window if="switch" orientation="landscape" fullscreen="true" width="0" height="0" resizable="true" />
@@ -44,14 +44,14 @@
 	<classpath name="source" />
 	
 	<!-- PSYCH ENGINE CUSTOMIZATION -->
-	<define name="MODS_ALLOWED" if="desktop" />
-	<define name="LUA_ALLOWED" if="desktop" />
-	<define name="VIDEOS_ALLOWED" if="web || windows" unless="32bits"/>
+	<define name="MODS_ALLOWED" if="cpp" />
+	<define name="LUA_ALLOWED" if="cpp" />
+	<define name="VIDEOS_ALLOWED" if="cpp" unless="32bits"/>
 	<define name="PSYCH_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
-	<define name="CRASH_HANDLER" if="desktop release" />
+	<define name="CRASH_HANDLER" if="cpp release" />
 
 	<!-- DONT ENABLE THIS -->
-	<define name="CHECK_FOR_UPDATES" if="desktop officialBuild"/>
+	<define name="CHECK_FOR_UPDATES" if="cpp officialBuild"/>
 
 	<!-- <define name="PRELOAD_ALL" /> -->
 	<define name="PRELOAD_ALL" unless="web" />
@@ -65,13 +65,14 @@
 		<library name="assets"         preload="true" />
 	</section>
 	
-	<assets path="assets"         library="assets"         exclude="*.ogg" if="web"/>
-	<assets path="assets"         library="assets"         exclude="*.mp3" unless="web"/>
+	<assets path="assets" library="assets" exclude="*.ogg" if="web" />
+	<assets path="assets" library="assets" exclude="*.mp3" unless="web" />
 	
-	<assets path='_config'/>
-	<assets path='_cursor' embed='true'/>
+	<assets path='config'/>
+	<assets path='cursor' embed='true'/>
 	<assets path='root' rename=''/>
 	<assets path='art/readme.txt' rename='do NOT readme.txt' />
+	<define name="HXCPP_ANDROID_PLATFORM" value="21" if="android"/>
 	<!-- <template path='mods' /> -->
 	
 	<!-- assets path="CHANGELOG.md" rename='changelog.txt' -->
@@ -94,10 +95,9 @@
 	<haxelib name="SwiftScript" />
 	<haxelib name="away3d" />
 	<haxelib name="flxanimate" />
-
 	<haxelib name="flxgif" />
 	<haxelib name="yagp" />
-
+	<haxelib name="extension-androidtools" if="android"/>
 	<haxelib name="haxeui-core" />
 	<haxelib name="haxeui-flixel" />
 
@@ -111,6 +111,40 @@
 	<haxelib name="faxe" if='switch'/>
 	<!--<haxelib name="polymod"/> -->
 	<haxelib name="discord_rpc" if="desktop"/>
+
+		<!--Mobile Controls Define-->
+	<define name="mobileC" if="mobile" /> <!--Can be added windows, mac or linux-->
+
+	<assets path="mobile" if="mobileC" />
+
+	<!--Always enable Null Object Reference check-->
+	<haxedef name="HXCPP_CHECK_POINTER" />
+	<haxedef name="HXCPP_STACK_LINE" />
+	<haxedef name="HXCPP_STACK_TRACE" />
+
+	<section if="android">
+		<config>
+			<!--Gradle-->
+			<!--<android gradle-version="7.4.2" gradle-plugin="7.3.1" />--> <!-- ENABLE THIS IF YOU HAVE ISSUES AT COMPILE -->
+
+			<!--Target SDK-->
+			<android target-sdk-version="33" if="${lime &lt; 8.1.0}"/>
+        </config>
+	</section>
+
+	<config android="org.gradle.jvmargs=-Xmx4608m -XX:MaxMetaspaceSize=512m" />
+	<config android="android.javaCompile.suppressSourceTargetDeprecationWarning=true" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" /> 
+
+
+	<section if="ios">
+		<!--Dependency--> 
+		<dependency name="Metal.framework" if="${lime &lt; 8.0.0}" />
+	</section>
+
+    <haxedef name="no-deprecation-warnings" unless="debug" />
 	<!-- <haxelib name="hxcpp-debug-server" if="desktop"/> -->
 
 	<!-- <haxelib name="markdown" /> -->

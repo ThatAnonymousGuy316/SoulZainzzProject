@@ -31,14 +31,15 @@ function onSubState()
 
     resume = makeMenuText("Resume", 0);
     restartSong = makeMenuText("Restart Song", 1);
-    options = makeMenuText("Options", 2);
-    exit = makeMenuText("Exit", 3);
+    exit = makeMenuText("Exit", 2);
 
-    menuItems = [resume, restartSong, options, exit];
+    menuItems = [resume, restartSong, exit];
     curSelected = 0;
     updateSelection();
 
     this.cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
+
+    addDPad();
 }
 
 function makeMenuText(label:String, index:Int):FlxText
@@ -82,8 +83,6 @@ function confirmSelection()
         case 1:
             MusicBeatState.resetState();
         case 2:
-            goToOptions(true);
-        case 3:
             if (PlayState.isStoryMode){
                 switchState("Story");
             }else{
@@ -127,5 +126,6 @@ function onUpdate(elapsed)
 
 function resumeGame()
 {
+    removeDPad();
     close();
 }

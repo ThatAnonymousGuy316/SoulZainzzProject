@@ -10,6 +10,7 @@ export/*
 .vscode/*
 *.code-workspace
 .haxelib/*
+.idea/*
 # Local history which shouldn't be shared.
 .history
 .ionide

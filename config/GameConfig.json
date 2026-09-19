@@ -4,7 +4,8 @@
         "MainMenu": "Menu",
         "StoryMenu": "Story",
         "Freeplay": "Freeplay",
-        "Pause": "Pause"
+        "Pause": "Pause",
+        "Options": "Options"
     },
     "WindowTitle": "Friday Night Funkin': SoulZainzz Engine",
     "WindowIcon": "SoulZainzzIcon",

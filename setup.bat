@@ -9,6 +9,7 @@ haxelib install haxeui-core
 haxelib install haxeui-flixel
 haxelib install hxcpp
 haxelib install hxvlc 2.3.1
+haxelib install extension-androidtools 2.2.2
 haxelib git SwiftScript https://github.com/ThatAnonymousGuy316/SwiftScript.git
 haxelib git hscript-iris https://github.com/crowplexus/hscript-iris/
 haxelib git away3d https://github.com/CodenameCrew/away3d

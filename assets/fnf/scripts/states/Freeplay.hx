@@ -19,7 +19,6 @@ var diffHintOffset:Float = 200;
 var pico:FlxSprite;
 var boyfriend:FlxSprite;
 var capsuleGrp:FlxSpriteGroup;
-var freakyMenu:FlxSound;
 var freeplayBG:FlxSprite;
 
 var selectorSongBf:FlxSprite;
@@ -140,23 +139,9 @@ function onState()
     selectorDiffPico.screenCenter(FlxAxes.X);
     add(selectorDiffPico);
 
-    freakyMenu = new FlxSound().loadEmbedded(Paths.music('freeplayRandom/freeplayRandom'));
-    freakyMenu.volume = 0.5;
-    freakyMenu.play();
-}
+    playMusic('freeplayRandom/freeplayRandom');
 
-function onDestroy()
-{
-    freakyMenu.stop();
-    freakyMenu.destroy();
-}
-
-function onFocus(){
-    freakyMenu.play();
-}
-
-function onFocusLost(){
-    freakyMenu.pause();
+    addDPad();
 }
 
 function onUpdate(elapsed)
@@ -242,18 +227,18 @@ function updateDifficultiesForSong(index:Int)
     var diffStr:String = leWeek.difficulties;
     if (diffStr != null)
     {
-        diffStr = diffStr.trim();
+        diffStr = StringTools.trim(diffStr);
     }
 
     if (diffStr != null && diffStr.length > 0)
     {
         var splitDiffs:Array<String> = diffStr.split(',');
         var i:Int = splitDiffs.length - 1;
-        while (i > 0)
+        while (i >= 0)
         {
             if (splitDiffs[i] != null)
             {
-                splitDiffs[i] = splitDiffs[i].trim();
+                splitDiffs[i] = StringTools.trim(splitDiffs[i]);
                 if (splitDiffs[i].length < 1)
                 {
                     splitDiffs.remove(splitDiffs[i]);
@@ -269,11 +254,11 @@ function updateDifficultiesForSong(index:Int)
     }
 
     difficulties = diffs;
-    CoolUtil.difficulties = diffs;
+    CoolUtil.difficulties = diffs.copy();
 
     if (difficulties.contains(CoolUtil.defaultDifficulty))
     {
-        curDiff = Math.round(Math.max(0, CoolUtil.defaultDifficulties.indexOf(CoolUtil.defaultDifficulty)));
+        curDiff = Math.round(Math.max(0, difficulties.indexOf(CoolUtil.defaultDifficulty)));
     }
     else
     {

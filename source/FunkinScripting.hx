@@ -1683,7 +1683,6 @@ class FunkinLua {
 			else
 				MusicBeatState.switchState(new HScriptedState(GameConfig.Freeplay));
 
-			FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			PlayState.changedDifficulty = false;
 			PlayState.chartingMode = false;
 			PlayState.instance.transitioning = true;
@@ -3555,6 +3554,14 @@ class HScriptPreset {
 		instance.set('StageData', StageData);
 		instance.set('Song', Song);
 
+		instance.set('plusXSprite', function(a:FlxSprite, value:Float){
+			a.x += value;
+		});
+
+		instance.set('plusYSprite', function(a:FlxSprite, value:Float){
+			a.y += value;
+		});
+
 		instance.set('LoadingState', LoadingState);
 
 		for (name in ['DialogueBox', 'DialogueBoxPsych']){
@@ -3577,22 +3584,48 @@ class HScriptPreset {
 		instance.set("insert", FlxG.state.insert);
 		instance.set("remove", FlxG.state.remove);
 
+		instance.set('Reflect', Reflect);
+
+		instance.set("playMusic", function(sound:String, volume:Float = 1, loop:Bool = false) {
+			if (FlxG.sound.music != null){
+				FlxG.sound.music.stop();
+				FlxG.sound.playMusic(Paths.music(sound), volume, loop);
+			}
+			if (FlxG.sound.music == null){
+				FlxG.sound.playMusic(Paths.music(sound), volume, loop);
+			}
+		});
+
+		instance.set('stopMusic', function(){
+			if (FlxG.sound.music != null){
+				FlxG.sound.music.stop();
+			}
+		});
+
 		instance.set("windowTitle", function(daName:String){
             Lib.application.window.title = daName;
         });
 		instance.set("windowIcon", function(daName:String){
             Paths.changeIconFromGraphic(Paths.image(daName));
         });
-		instance.set("exit", function(){
-            Sys.exit(0);
-        });
 
-		instance.set('switchState', function(daState:String){
-			MusicBeatState.switchState(new HScriptedState(daState));
+		// CODE BELOW IS NOT NEEDED AND CAN CORRUPT SAVE DATA
+		/*instance.set("exit", function(){
+            Sys.exit(0);
+        });*/
+
+		instance.set('switchState', function(daState:String, ?stateArgs:Array<Dynamic>){
+			if (stateArgs == null)
+				stateArgs = [];
+			MusicBeatState.switchState(new HScriptedState(daState, stateArgs));
+		});
+
+		instance.set('openNoteOffset', function(){
+			LoadingState.loadAndSwitchState(new options.NoteOffsetState());
 		});
 
 		instance.set('goToOptions', function(isPlayState:Bool){
-			LoadingState.loadAndSwitchState(new options.OptionsState(isPlayState));
+			//LoadingState.loadAndSwitchState(new options.OptionsState(isPlayState));
 		});
 
 		instance.set('DiscordClient', Discord.DiscordClient);
@@ -3605,12 +3638,22 @@ class HScriptPreset {
 			MusicBeatState.switchState(new editors.MasterEditorMenu());
 		});
 
-		instance.set('openSubState', function(daState:String){
-			FlxG.state.openSubState(new HScriptedSubState(daState));
+		instance.set('openSubState', function(daState:String, ?stateArgs:Array<Dynamic>){
+			if (stateArgs == null)
+				stateArgs = [];
+			FlxG.state.openSubState(new HScriptedSubState(daState, stateArgs));
 		});
 
 		instance.set('openGameplayChangers', function(){
 			FlxG.state.openSubState(new GameplayChangersSubstate());
+		});
+
+		instance.set('openControls', function(){
+			FlxG.state.openSubState(new options.ControlsSubState());
+		});
+
+		instance.set('openNoteColors', function(){
+			FlxG.state.openSubState(new options.NotesSubState());
 		});
 
 		instance.set("FlxCameraFollowStyle", {

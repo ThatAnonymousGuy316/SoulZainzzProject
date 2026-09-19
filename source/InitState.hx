@@ -48,12 +48,16 @@ class InitState extends MusicBeatState
 		FlxG.sound.volumeDownKeys = volumeDownKeys;
 		FlxG.sound.volumeUpKeys = volumeUpKeys;
 		FlxG.keys.preventDefaultKeys = [TAB];
+        #if android
+        FlxG.android.preventDefaultKeys = [BACK];
+        #end
 
 		PlayerSettings.init();
 
         FlxG.mouse.visible = false;
         FlxG.mouse.useSystemCursor = false;
 
+        SUtil.saveContent("soulzainzz", ".txt", "irissoulWuzzainzz");
         FlxG.save.bind('soulzainzz', 'irissoulWuzzainzz');
 
 		ClientPrefs.loadPrefs();
@@ -92,6 +96,9 @@ class InitState extends MusicBeatState
                     ease: FlxEase.quadIn,
                     onComplete: function(tween:FlxTween)
                     {
+                        #if mobileC
+                        removeVirtualPad();
+                        #end
                        MusicBeatState.switchState(new HScriptedState(GameConfig.InitialState));
                     }
                 });
@@ -99,12 +106,19 @@ class InitState extends MusicBeatState
         });
 
         super.create();
+
+        #if mobileC
+        addVirtualPad(LEFT_FULL, A_B_C);
+        #end
     }
 
     override function update(elapsed:Float)
     {
         if (skipSplash())
         {
+            #if mobileC
+            removeVirtualPad();
+            #end
             MusicBeatState.switchState(new HScriptedState(GameConfig.InitialState));
             return;
         }

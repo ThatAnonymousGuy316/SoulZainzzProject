@@ -3,8 +3,6 @@ var freeplay:FlxSprite;
 var options:FlxSprite;
 var boyfriend:FlxSprite;
 var menuBG:FlxSprite;
-var freakyMenu:FlxSound;
-
 var menuItems:Array<FlxSprite>;
 var curSelected:Int = 0;
 
@@ -82,23 +80,9 @@ function onState()
     curSelected = 0;
     updateSelection();
 
-    freakyMenu = new FlxSound().loadEmbedded(Paths.music('stayFunky/stayFunky'));
-    freakyMenu.volume = 0.5;
-    freakyMenu.play();
-}
+    playMusic('stayFunky/stayFunky');
 
-function onDestroy()
-{
-    freakyMenu.stop();
-    freakyMenu.destroy();
-}
-
-function onFocus(){
-    freakyMenu.play();
-}
-
-function onFocusLost(){
-    freakyMenu.pause();
+    addDPad();
 }
 
 function onUpdate(elapsed)
@@ -191,7 +175,7 @@ function confirmSelection()
         case 2:
             swipeOut(options, [storyMenu, freeplay], menuBG, function()
             {
-                goToOptions();
+                switchState('Options');
             });
             swipeDown(boyfriend);
     }

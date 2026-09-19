@@ -1,5 +1,6 @@
 import Paths;
 import flixel.sound.FlxSound;
+import flixel.FlxG;
 
 import FunkinScripting.FunkinLua;
 import FunkinScripting.FunkinHScript;

@@ -30,8 +30,6 @@ var diffTweenTime:Float = 0.2;
 var txtTracklist:FlxText;
 var tracklistY:Float = 0;
 
-var freakyMenu:FlxSound;
-
 var loadingWeek:Bool = false;
 var loadDelayTime:Float = 1;
 var loadFadeTime:Float = 0.5;
@@ -137,30 +135,16 @@ function onState()
     selectorDiffPico.screenCenter(FlxAxes.X);
     add(selectorDiffPico);
 
-    freakyMenu = new FlxSound().loadEmbedded(Paths.music('girlfriendsRingtone/girlfriendsRingtone'));
-    freakyMenu.volume = 0.5;
-    freakyMenu.play();
-}
+    playMusic('girlfriendsRingtone/girlfriendsRingtone');
 
-function onDestroy()
-{
-    freakyMenu.stop();
-    freakyMenu.destroy();
-}
-
-function onFocus(){
-    freakyMenu.play();
-}
-
-function onFocusLost(){
-    freakyMenu.pause();
+    addDPad();
 }
 
 function onUpdate(elapsed)
 {
     if (loadingWeek)
     {
-        return; // block all input while the confirm/fade/load sequence is playing out
+        return;
     }
 
     if (keys.justPressed.CONTROL)
@@ -236,18 +220,18 @@ function updateDifficultiesForWeek(index:Int)
     var diffStr:String = leWeek.difficulties;
     if (diffStr != null)
     {
-        diffStr = diffStr.trim();
+        diffStr = StringTools.trim(diffStr);
     }
 
     if (diffStr != null && diffStr.length > 0)
     {
         var splitDiffs:Array<String> = diffStr.split(',');
         var i:Int = splitDiffs.length - 1;
-        while (i > 0)
+        while (i >= 0)
         {
             if (splitDiffs[i] != null)
             {
-                splitDiffs[i] = splitDiffs[i].trim();
+                splitDiffs[i] = StringTools.trim(splitDiffs[i]);
                 if (splitDiffs[i].length < 1)
                 {
                     splitDiffs.remove(splitDiffs[i]);
@@ -263,11 +247,11 @@ function updateDifficultiesForWeek(index:Int)
     }
 
     difficulties = diffs;
-    CoolUtil.difficulties = diffs;
+    CoolUtil.difficulties = diffs.copy();
 
     if (difficulties.contains(CoolUtil.defaultDifficulty))
     {
-        curDifficulty = Math.round(Math.max(0, CoolUtil.defaultDifficulties.indexOf(CoolUtil.defaultDifficulty)));
+        curDifficulty = Math.round(Math.max(0, difficulties.indexOf(CoolUtil.defaultDifficulty)));
     }
     else
     {
@@ -342,8 +326,7 @@ function fadeOutEverything()
     {
         FlxTween.tween(member, {alpha: 0}, loadFadeTime, {ease: FlxEase.quadOut});
     }
-
-    // boyfriend fades out last of all, and its onComplete is what actually triggers the week load
+    
     FlxTween.tween(boyfriend, {alpha: 0}, loadFadeTime, {
         ease: FlxEase.quadOut,
         onComplete: function(twn:FlxTween)
